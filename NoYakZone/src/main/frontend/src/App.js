@@ -30,7 +30,7 @@ function App() {
       <h1>노약존</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          이름 입력　: 　
+          이름 입력　: 　sdfsdf
           <input
             type="text"
             value={name}
