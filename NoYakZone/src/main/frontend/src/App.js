@@ -1,47 +1,32 @@
-import React, { useState, useEffect } from "react";
+// App.js
+import './App.css';
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom'; // Routes 대신에 Route를 import 합니다.
+
+
+import MainPage from './page/MainPage';
+import About from './page/About';
+import Community from './page/Community';
+import SignUpPage from './page/SignUpPage';
+import Footer from './component/Footer';
+import Navigate from './component/Navigate';
 
 function App() {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [data, setData] = useState([]);
-
-  const handleChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setMessage(`집가고싶다, ${name}!`);
-    setName('');
-  };
-
-  useEffect(() => {
-    fetch("/temp")
-      .then((res) => {
-        return res.json();
-      })
-      .then(function (result) {
-        setData(result);
-      });
-  }, []);
-
-  return (
-    <div>
-      <h1>노약존</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          이름 입력　: 　sdfsdf
-          <input
-            type="text"
-            value={name}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">확인</button>
-      </form>
-      {message && <h2>{message}</h2>}
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Navigate/>
+                
+                {/* 각 경로에 대한 Route 컴포넌트를 사용합니다. */}
+                <Route exact path="/" component={MainPage} />       
+                <Route path="/About" component={About} />
+                <Route path="/Community" component={Community} />
+                <Route path="/signUp" component={SignUpPage} />
+                
+                <footer/>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

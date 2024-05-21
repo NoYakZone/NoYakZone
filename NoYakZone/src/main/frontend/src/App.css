@@ -36,3 +36,106 @@
     transform: rotate(360deg);
   }
 }
+
+/* Navigate.js */
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #cb3f3f;
+  padding: 10px;
+}
+
+.navbarMenu {
+  color: black;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+/* Mainpage.js */
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  padding: 20px;
+  color: white;
+}
+
+.Content {
+  flex: 1;
+}
+
+.ServiceInfo {
+  margin-bottom: 50px;
+  background-color: bisque;
+}
+
+.serviceGoal {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.autoPlay {
+  background-color: yellow;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.GoAboutUsPage {
+  margin-bottom: 50px;
+  cursor: pointer;
+  text-align: center;
+  background-color: blue;
+}
+
+.GoAboutUsPage h2 {
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.DrugInfo {
+  margin-bottom: 50px;
+  background-color: khaki;
+}
+
+.fisrtPic {
+  margin-bottom: 50px;
+  text-align: center;
+  color: red;
+  background-color: yellow;
+}
+
+.fisrtPic h2 {
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btn_Menu {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.btn_Menu p {
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+/* DrugDescription.js */
+
+/* Community.js */
+
+/* Footer.js */
+.footer {
+  height: 88px;
+  margin-top: auto;
+  background-color: coral;
+}
+
