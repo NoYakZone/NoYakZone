@@ -1,0 +1,15 @@
+/* Navigate.js */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #cb3f3f;
+    padding: 10px;
+  }
+  
+  .navbarMenu {
+    color: black;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+ 

@@ -1,0 +1,61 @@
+/* MainPage.css */
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  color: #333; /* 일반적인 글꼴 색상을 어둡게 설정 */
+  background: #f4f4f4; /* 밝은 배경색으로 설정 */
+  font-family: Arial, sans-serif; /* 일관된 글꼴 적용 */
+}
+
+.Content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 섹션 간 간격 */
+}
+
+.ServiceInfo, .DrugInfo {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 박스 그림자 추가 */
+}
+
+.serviceGoal, .autoPlay {
+  color: #333;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.GoAboutUsPage {
+  cursor: pointer;
+  text-align: center;
+  background-color: #007BFF; /* 밝은 파란색으로 변경 */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.DrugInfo {
+  background-color: #fefbd8; /* 연한 노랑색으로 변경 */
+}
+
+.Community {
+  text-align: center;
+  color: #333;
+  background-color: #D6EAF8; /* 연한 하늘색으로 변경 */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.ChatBot {
+  text-align: center;
+  background-color: #58D68D; /* 연한 녹색으로 변경 */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}

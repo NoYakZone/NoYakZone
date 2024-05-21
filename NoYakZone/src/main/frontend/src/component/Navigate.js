@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import '../App.css';
+import '../CSS/Navigate.css';
 
 import Login from "./Login";
 
@@ -29,6 +29,7 @@ function Navigate() {
                 <Link className='navbarMenu' to={'/'}>Main</Link>
                 <Link className='navbarMenu' to={'/About'}>About</Link>
                 <Link className='navbarMenu' to={'/Community'}>Contact</Link>
+                <Link className='navbarMenu' to={'/ChatBot'}>ChatBot</Link>
 
                    {/* 로그인*/}
                    {isLoggedIn ? (
@@ -37,7 +38,7 @@ function Navigate() {
                     <Login onLogin={handleLogin} />
                 )}
                 <div className='join'>
-                    <Link className='navbarMenu' to={'/signUp'}>회원가입</Link>
+                    <Link className='navbarMenu' to={'/MemberChoice'}>회원가입</Link>
                 </div>
             </div>
         </div>

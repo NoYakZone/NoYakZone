@@ -4,9 +4,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
+import '../CSS/MainPage.css'
 
-import Navigate from '../component/Navigate';
-import Footer from '../component/Footer';
 
 const MainPage = () => {
     const history = useHistory();
@@ -15,10 +14,12 @@ const MainPage = () => {
         history.push('/about');
     };
 
+    const goToDrugInfo = () =>(
+        history.push('/Community')
+    )
+
     return (
         <div className='MainContainer'>
-            <Navigate />
-
             <div className='Content'>
                 <div className='ServiceInfo'>
                     <h2>서비스 소개</h2>
@@ -30,19 +31,19 @@ const MainPage = () => {
                     </p>
 
                     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                        <SwiperSlide>이거</SwiperSlide>
+                        <SwiperSlide>Slide 1</SwiperSlide>
                         <SwiperSlide>Slide 2</SwiperSlide>
                         <SwiperSlide>Slide 3</SwiperSlide>
                     </Swiper>
                 </div>
 
                 <div className='GoAboutUsPage' onClick={goToAboutPage}>
-                    <h2>About</h2>
+                    <h2>약 소개 페이지</h2>
                 </div>
 
-                <div className='DrugInfo'>
+                <div className='DrugInfo' onClick={goToAboutPage}>
                     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                        <SwiperSlide>저거</SwiperSlide>
+                        <SwiperSlide>Slide 1</SwiperSlide>
                         <SwiperSlide>Slide 2</SwiperSlide>
                         <SwiperSlide>Slide 3</SwiperSlide>
                         <SwiperSlide>Slide 4</SwiperSlide>
@@ -54,16 +55,16 @@ const MainPage = () => {
                     </Swiper>
                 </div>
 
-                <div className='fisrtPic'>
-                    <h2>두번쨰 내용</h2>
+                <div className='Community'onClick={goToDrugInfo}>
+                    <h2>커뮤니티</h2>
                 </div>
 
-                <div className='btn_Menu'>
-                    <p>세번째</p>
+                <div className='ChatBot'>
+                    <p>상담 챗봇 페이지</p>
                 </div>
             </div>
 
-            <Footer />
+
         </div>
     );
 };
