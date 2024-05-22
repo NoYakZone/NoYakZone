@@ -15,7 +15,7 @@ public class DataController {
 
     @PostMapping("/register")
     public String register(@RequestBody UserDto user) {
-        userService.registerUser(user);
+        userService.register(user);
         return "User registered successfully";
     }
 }

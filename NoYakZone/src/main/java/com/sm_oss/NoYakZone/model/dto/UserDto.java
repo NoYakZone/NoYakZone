@@ -1,8 +1,8 @@
 package com.sm_oss.NoYakZone.model.dto;
 
-import lombok.Data;
+import org.springframework.stereotype.Component;
 
-@Data
+@Component
 public class UserDto {
     private String id;
     private String name;
