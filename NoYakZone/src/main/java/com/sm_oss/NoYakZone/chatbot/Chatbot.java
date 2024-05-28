@@ -12,8 +12,8 @@ import java.util.List;
 @Component
 public class Chatbot {
     private static List<String> conversationHistory = new ArrayList<>();
-    
-    public String getResponse(String message) {//api호출 시 첫 실행
+
+    public String getResponse(String message) {// api호출 시 첫 실행
         updateConversationHistory("user", message);
         String res = callChatGPT(message);
         // 메서드 구현
@@ -21,10 +21,10 @@ public class Chatbot {
         return res;
     }
 
-    private void updateConversationHistory(String role, String content) {//리스트에 대화내용 추가
+    private void updateConversationHistory(String role, String content) {// 리스트에 대화내용 추가
         // 대화 내용을 JSON 문자열로 변환
         String newEntry = "{\"role\": \"" + role + "\", \"content\": \"" + content.replace("\"", "\\\"") + "\"}";
-        
+
         // 대화를 추가하기 전에 토큰 수를 체크
         while (!isTokenLimitSafe(newEntry)) {
             // 토큰 수가 안전한 상태가 될 때까지 이전 대화를 제거
@@ -34,29 +34,29 @@ public class Chatbot {
                 break; // 대화 기록이 비어있으면 중단
             }
         }
-        
+
         // 대화 기록에 새 대화 추가
         conversationHistory.add(newEntry);
     }
 
-private boolean isTokenLimitSafe(String newEntry) {// 대략적인 토큰 수 체크를 위한 메서드
-    // 새로운 항목을 추가했을 때의 대략적인 문자 수
-    int estimatedSize = newEntry.length();
-    for (String entry : conversationHistory) {
-        estimatedSize += entry.length();
-    }
-    
-    // 여기서는 단순화를 위해 한 토큰을 4글자로 가정
-    // 한글 : 한글자당 1토큰
-    // 영어 : 한 단어당 1토큰
-    // 따라서 영어가 유리
-    int estimatedTokens = estimatedSize / 4;
-    
-    // 10K 토큰보다 적으면 안전하다고 가정
-    return estimatedTokens < 10000;
-}
+    private boolean isTokenLimitSafe(String newEntry) {// 대략적인 토큰 수 체크를 위한 메서드
+        // 새로운 항목을 추가했을 때의 대략적인 문자 수
+        int estimatedSize = newEntry.length();
+        for (String entry : conversationHistory) {
+            estimatedSize += entry.length();
+        }
 
-    private static String callChatGPT(String prompt) {//실제 gpt api 사용
+        // 여기서는 단순화를 위해 한 토큰을 4글자로 가정
+        // 한글 : 한글자당 1토큰
+        // 영어 : 한 단어당 1토큰
+        // 따라서 영어가 유리
+        int estimatedTokens = estimatedSize / 4;
+
+        // 10K 토큰보다 적으면 안전하다고 가정
+        return estimatedTokens < 10000;
+    }
+
+    private static String callChatGPT(String prompt) {// 실제 gpt api 사용
         String apiKey = System.getenv("OPENAI_API_KEY");
 
         try {
@@ -70,18 +70,20 @@ private boolean isTokenLimitSafe(String newEntry) {// 대략적인 토큰 수 �
             String messagesJson = String.join(",", conversationHistory);
 
             String input = "{" +
-                "\"model\": \"gpt-3.5-turbo\"," +
-                "\"messages\": [" +
+                    "\"model\": \"gpt-3.5-turbo\"," +
+                    "\"messages\": [" +
                     "{\"role\": \"system\", \"content\": \"Write in korean\"}," +
                     "{\"role\": \"system\", \"content\": \"You are a drug treatment counselor.\"}," +
-                    "{\"role\": \"system\", \"content\": \"You ask a variety of questions to get more information from what the patient says.\"}," +
-                    "{\"role\": \"system\", \"content\": \"Each conversation consists of no more than two sentences.\"}," +
+                    "{\"role\": \"system\", \"content\": \"You ask a variety of questions to get more information from what the patient says.\"},"
+                    +
+                    "{\"role\": \"system\", \"content\": \"Each conversation consists of no more than two sentences.\"},"
+                    +
                     "{\"role\": \"system\", \"content\": \"The counselor states the conclusion he or she thinks.\"}," +
-                    "{\"role\": \"system\", \"content\": \"If the counselor determines that the patient's condition is serious, he or she recommends an actual counselor or hospital.\"}," +
+                    "{\"role\": \"system\", \"content\": \"If the counselor determines that the patient's condition is serious, he or she recommends an actual counselor or hospital.\"},"
+                    +
                     messagesJson +
-                "]" +
-               "}";
-
+                    "]" +
+                    "}";
 
             try (OutputStream os = httpURLConnection.getOutputStream()) {
                 byte[] inputBytes = input.getBytes("utf-8");
