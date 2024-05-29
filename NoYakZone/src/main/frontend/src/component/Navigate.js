@@ -29,6 +29,13 @@ function Navigate() {
     const gotoMain = () => {
         history.push('/');
     }
+    const goToFindPassword = () => {
+        history.push('/findPassword');
+    };
+
+    const goToFindId = () => {
+        history.push('/findId');
+    };
 
     return (
         <div>
@@ -51,6 +58,10 @@ function Navigate() {
                 <div className='join'>
                     <Link className='navbarMenu' to={'/MemberChoice'}>회원가입</Link>
                 </div>
+                <div className='FindPasswordLink' onClick={goToFindPassword}>
+                    <p>비밀번호 찾기</p>
+                </div>
+               
             </div>
         </div>
     );

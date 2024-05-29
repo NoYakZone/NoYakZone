@@ -1,0 +1,34 @@
+/* FindId.css */
+.find-id-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.find-id-container form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.find-id-container label {
+    margin-bottom: 5px;
+}
+
+.find-id-container input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.find-id-container button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.find-id-container button:hover {
+    background-color: #0056b3;
+}
