@@ -1,9 +1,11 @@
+nano /c/thanks/NoYakZone/NoYakZone/.gitignore
 HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+/src/main/resources/application-private.properties
 
 ### STS ###
 .apt_generated
