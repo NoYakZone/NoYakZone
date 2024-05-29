@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"users\"")
 @Data
 public class UserDto {
     @Id
@@ -18,5 +18,4 @@ public class UserDto {
     private String email;
     private String address;
     private boolean official;
-
 }
