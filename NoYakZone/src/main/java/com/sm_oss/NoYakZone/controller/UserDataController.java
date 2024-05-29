@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.sm_oss.NoYakZone.model.UserDto;
 import com.sm_oss.NoYakZone.model.UserRepository;
@@ -18,6 +19,8 @@ import com.sm_oss.NoYakZone.service.UserService;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "http://localhost:3000")     //새롭게 추가
 @RestController
 @RequestMapping("/userData")
 public class UserDataController {

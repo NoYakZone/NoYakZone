@@ -11,6 +11,8 @@ import MemberChoice from './page/MemberChoice';
 import SignUpGeneral from './page/SignUpGeneral';
 import SignUpPolice from './page/SignUpPolice';
 import ChatBot from './page/ChatBot';
+import FindId from './page/FindId';
+import FindPassword from './page/FindPassword';
 
 function App() {
     return (
@@ -25,6 +27,8 @@ function App() {
                     <Route path="/signUpPolice" component={SignUpPolice} />
                     <Route path="/signUpGeneral" component={SignUpGeneral} />
                     <Route path="/ChatBot" component={ChatBot} />
+                    <Route path="/findPassword" component={FindPassword} />
+                    <Route path="/findId" component={FindId} />
 
                 </div>
                 <Footer />

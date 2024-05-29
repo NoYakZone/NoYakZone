@@ -1,43 +1,141 @@
 import React, { useState } from 'react';
-import '../CSS/SignUp.css'; // CSS 파일 임포트
+import axios from 'axios';
+import '../CSS/SignUp.css';
 import { useHistory } from 'react-router-dom';
 
 const SignUpGeneral = () => {
     const [formData, setFormData] = useState({
-        userId: '',
+        id: '',
         name: '',
         password: '',
-        birthDate: '',
-        phoneNumber: '',
+        birth: '',
+        phone1: '',
+        phone2: '',
+        phone3: '',
         email: '',
-        address: ''
+        address: '',
+        official: false
     });
 
+    const [idValid, setIdValid] = useState(true);
+    const [passwordValid, setPasswordValid] = useState(true);
+    const [validationMessage, setValidationMessage] = useState('');
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData({
             ...formData,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         });
+    };
+
+    const handlePhoneChange = (e) => {
+        const { name, value } = e.target;
+        const phoneInput = value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자는 제거
+
+        if (phoneInput.length <= 3 && name === 'phone1') {
+            setFormData({
+                ...formData,
+                [name]: phoneInput
+            });
+        } else if (phoneInput.length <= 4 && name === 'phone2') {
+            setFormData({
+                ...formData,
+                [name]: phoneInput
+            });
+        } else if (phoneInput.length <= 4 && name === 'phone3') {
+            setFormData({
+                ...formData,
+                [name]: phoneInput
+            });
+        }
+    };
+
+    const handlePhoneKeyUp = (e) => {
+        const { name, value } = e.target;
+        const phoneInput = value.replace(/[^0-9]/g, '');
+
+        if (phoneInput.length === 3 && name === 'phone1') {
+            document.getElementById('phone2').focus();
+        } else if (phoneInput.length === 4 && name === 'phone2') {
+            document.getElementById('phone3').focus();
+        } else if (phoneInput.length === 0 && name === 'phone2') {
+            document.getElementById('phone1').focus();
+        } else if (phoneInput.length === 0 && name === 'phone3') {
+            document.getElementById('phone2').focus();
+        }
     };
 
     const history = useHistory();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('General User Registration Data:', formData);
-        
-        // 이곳에서 회원가입 데이터를 처리합니다. (예: API 호출)
-        // 데이터 처리가 성공하면 메인 페이지로 리디렉션
-        history.push('/'); // 메인 페이지로 사용자를 리디렉션합니다.
-    };
-
     const validateInputs = () => {
         const userIdRegex = /^[a-zA-Z0-9]{4,15}$/;
-        if (!userIdRegex.test(formData.userId) || !userIdRegex.test(formData.name)) {
-            alert("아이디와 이름은 영어와 숫자만 포함하여 4~15 글자 사이여야 합니다.");
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
+
+        if (!userIdRegex.test(formData.id)) {
+            setIdValid(false);
+            setValidationMessage('아이디는 영어와 숫자만 포함하여 4~15 글자 사이여야 합니다.');
+            return false;
         } else {
-            alert("입력이 유효합니다.");
+            setIdValid(true);
+        }
+
+        if (!passwordRegex.test(formData.password)) {
+            setPasswordValid(false);
+            setValidationMessage('비밀번호는 영어와 숫자를 포함하여 8~15 글자 사이여야 합니다.');
+            return false;
+        } else {
+            setPasswordValid(true);
+        }
+
+        return true;
+    };
+
+    const checkIdAvailability = () => {
+        axios.get(`/userData/checkId/${formData.id}`)
+            .then(response => {
+                if (response.data) {
+                    setIdValid(true);
+                    setValidationMessage('아이디를 사용할 수 있습니다.');
+                    alert('아이디를 사용할 수 있습니다.');
+                } else {
+                    setIdValid(false);
+                    setValidationMessage('이미 사용 중인 아이디입니다.');
+                    alert('이미 사용 중인 아이디입니다.');
+                }
+            })
+            .catch(error => {
+                console.error('아이디 검증 중 오류가 발생했습니다.', error);
+                alert('아이디 검증 중 오류가 발생했습니다.');
+            });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (validateInputs() && idValid) {
+            const phoneNumber = `${formData.phone1}${formData.phone2}${formData.phone3}`;
+            const userData = { 
+                id: formData.id,
+                name: formData.name,
+                password: formData.password,
+                birth: formData.birth,
+                phone: phoneNumber,
+                email: formData.email,
+                address: formData.address,
+                official: formData.official
+            };
+
+            axios.post('/userData', userData)
+                .then(response => {
+                    console.log('Registration successful:', response.data);
+                    history.push('/'); // 메인 페이지로 리디렉션
+                })
+                .catch(error => {
+                    console.error('There was an error registering the user!', error);
+                });
+        } else {
+            alert(validationMessage);
         }
     };
 
@@ -45,12 +143,13 @@ const SignUpGeneral = () => {
         <div className="SignUpContainer">
             <h2>일반인 회원가입</h2>
             <form onSubmit={handleSubmit} className="SignUpForm">
-                <label htmlFor="userId">
+                <label htmlFor="id">
                     아이디:
                     <div className="flex-row">
-                        <input type="text" id="userId" name="userId" value={formData.userId} onChange={handleChange} />
-                        <button type="button" onClick={validateInputs}>입력 검증</button>
+                        <input type="text" id="id" name="id" value={formData.id} onChange={handleChange} />
+                        <button type="button" onClick={checkIdAvailability}>입력 검증</button>
                     </div>
+                    {!idValid && <span className="validationMessage">{validationMessage}</span>}
                 </label>
                 <label htmlFor="name">
                     이름:
@@ -59,14 +158,19 @@ const SignUpGeneral = () => {
                 <label htmlFor="password">
                     비밀번호:
                     <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+                    {!passwordValid && <span className="validationMessage">{validationMessage}</span>}
                 </label>
-                <label htmlFor="birthDate">
+                <label htmlFor="birth">
                     생년월일:
-                    <input type="date" id="birthDate" name="birthDate" value={formData.birthDate} onChange={handleChange} />
+                    <input type="date" id="birth" name="birth" value={formData.birth} onChange={handleChange} />
                 </label>
-                <label htmlFor="phoneNumber">
+                <label htmlFor="phone">
                     전화번호:
-                    <input type="text" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+                    <div className="flex-row">
+                        <input type="text" id="phone1" name="phone1" value={formData.phone1} onChange={handlePhoneChange} onKeyUp={handlePhoneKeyUp} maxLength="3" />
+                        <input type="text" id="phone2" name="phone2" value={formData.phone2} onChange={handlePhoneChange} onKeyUp={handlePhoneKeyUp} maxLength="4" />
+                        <input type="text" id="phone3" name="phone3" value={formData.phone3} onChange={handlePhoneChange} onKeyUp={handlePhoneKeyUp} maxLength="4" />
+                    </div>
                 </label>
                 <label htmlFor="email">
                     이메일:
@@ -75,6 +179,10 @@ const SignUpGeneral = () => {
                 <label htmlFor="address">
                     주소:
                     <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+                </label>
+                <label htmlFor="official">
+                    공식 사용자:
+                    <input type="checkbox" id="official" name="official" checked={formData.official} onChange={handleChange} />
                 </label>
 
                 <button type="submit">회원가입</button>

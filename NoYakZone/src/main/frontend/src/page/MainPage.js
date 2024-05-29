@@ -24,6 +24,7 @@ const MainPage = () => {
         history.push('/ChatBot');
     };
 
+
     return (
         <div className='MainContainer'>
             <div className='Content'>
@@ -47,7 +48,7 @@ const MainPage = () => {
                             <div className="con">
                                 <div className="txtwrap">
                                     <h3>Making Tomorrow Better</h3>
-                                    <p>끊임없는 신약 연구개발과 우수의약품 생산을 위해 정진하여 인류의 건강한 미래를 추구합니다.</p>
+                                    <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
                                 </div>
                                 <div className="ctr">
                                     <div className="vprev" tabIndex="0" role="button" aria-label="Previous slide"></div>
