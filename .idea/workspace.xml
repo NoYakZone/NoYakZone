@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="79d148a3-4cd2-4a8a-968c-bc523dd572b3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoYakZone/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/NoYakZone/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoYakZone/src/main/java/com/sm_oss/NoYakZone/NoYakZoneApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/NoYakZone/src/main/java/com/sm_oss/NoYakZone/NoYakZoneApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoYakZone/src/main/java/com/sm_oss/NoYakZone/controller/PageController.java" beforeDir="false" />
+    <list default="true" id="e14a44d8-6093-43cc-bb01-17d3bab4365b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/NoYakZone/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NoYakZone/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/NoYakZone">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,10 +36,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
   "associatedIndex": 8
 }]]></component>
-  <component name="ProjectId" id="2h5NV0wQKTpGcuAat4QoS5tNvbj" />
+  <component name="ProjectId" id="2gniSaGpaeivLTd0s0fZL6syKDO" />
+
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -34,20 +50,25 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/thanks/NoYakZone",
     "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "9c1b802e9320704bd104040fccbdf823",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="79d148a3-4cd2-4a8a-968c-bc523dd572b3" name="Changes" comment="" />
-      <created>1716880004030</created>
+      <changelist id="e14a44d8-6093-43cc-bb01-17d3bab4365b" name="Changes" comment="" />
+      <created>1716339752118</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1716880004030</updated>
-      <workItem from="1716880011144" duration="84000" />
+      <updated>1716339752118</updated>
+      <workItem from="1716339752964" duration="360000" />
     </task>
     <servers />
   </component>
