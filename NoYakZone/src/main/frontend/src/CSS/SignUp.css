@@ -1,3 +1,4 @@
+/* SignUpPage.css */
 .SignUpContainer {
     background-color: #f0f0f0;
     padding: 20px;
@@ -36,4 +37,32 @@
 
 .SignUpForm button:hover {
     background-color: #0056b3;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+}
+
+.flex-row input {
+    flex-grow: 2; /* 입력 필드가 더 많은 공간을 차지하도록 설정 */
+    margin-right: 10px; /* 버튼과의 간격 */
+}
+
+.flex-row button {
+    flex-grow: 1; /* 버튼의 크기를 상대적으로 줄임 */
+    white-space: nowrap; /* 버튼의 텍스트가 줄바꿈 되지 않도록 설정 */
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
 }

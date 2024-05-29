@@ -1,0 +1,53 @@
+/* Navigate.css */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #cb3f3f;
+  padding: 10px 20px;
+}
+
+.menuButton {
+  display: none; /* 기본적으로는 버튼을 숨김 */
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navbarLogo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.navbarLinks {
+  display: flex;
+  flex-grow: 1;
+}
+
+.navbarMenu {
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbarLinks {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px; /* Adjust based on actual navbar height */
+      left: 0;
+      background-color: #cb3f3f;
+  }
+
+  .navbarLinks.active {
+      display: flex;
+  }
+
+  .menuButton {
+      display: block;
+  }
+}

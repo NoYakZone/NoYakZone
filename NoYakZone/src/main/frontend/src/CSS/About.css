@@ -1,0 +1,112 @@
+.drugImg img {
+    height: 300px; /* 원하는 고정 높이 설정 */
+    width: auto; /* 가로 비율 유지 */
+}
+
+.search-page .innerwrap {
+    margin: 20px 0;
+}
+
+.searchwrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.text_search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text_search input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.text_search button {
+    padding: 5px 10px;
+}
+
+.initial_search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.initial_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.initial_buttons button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.initial_buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.search_results .innerwrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search_results ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 반응형 그리드 설정 */
+    gap: 20px;
+    width: 100%;
+}
+
+.search_results li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.search_results .thumb img {
+    height: 100px; /* 썸네일 이미지 높이 설정 */
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.searchImg img {
+    height: 24px; /* 검색 아이콘 높이 설정 */
+    width: 24px;
+}
+
+.text_search button img {
+    height: 16px; /* 버튼 내 아이콘 이미지 높이 설정 */
+    width: 16px;
+}
+
+.text_search button:last-child img {
+    height: 24px; /* 약학정보원 이미지 높이 설정 */
+    width: 24px;
+}
+
+/* 미디어 쿼리 설정 */
+@media (min-width: 1024px) {
+    .search_results ul {
+        grid-template-columns: repeat(4, 1fr); /* 전체 화면일 때 4개의 아이템 */
+    }
+}
+
+@media (max-width: 1023px) {
+    .search_results ul {
+        grid-template-columns: repeat(2, 1fr); /* 절반 화면일 때 2개의 아이템 */
+    }
+}

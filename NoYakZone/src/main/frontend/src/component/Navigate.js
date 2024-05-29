@@ -1,43 +1,55 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
-import '../App.css';
+import '../CSS/Navigate.css';
+import Logo from '../image/Logo.png';
 
 import Login from "./Login";
 
 function Navigate() {
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-
+    const history = useHistory();
 
     const handleLogin = (username) => {
-        // 로그인 처리 로직
         setIsLoggedIn(true);
         setUsername(username);
     };
 
     const handleLogout = () => {
-        // 로그아웃 처리 로직
         setIsLoggedIn(false);
         setUsername('');
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const gotoMain = () => {
+        history.push('/');
+    }
+
     return (
         <div>
             <div className='navbar'>
-                <Link className='navbarMenu' to={'/'}>Main</Link>
-                <Link className='navbarMenu' to={'/About'}>About</Link>
-                <Link className='navbarMenu' to={'/Community'}>Contact</Link>
+                <button className='menuButton' onClick={toggleMenu}>☰</button>
+                <img src={Logo} alt='Logo' className='navbarLogo' onClick={gotoMain}/>
+                <div className={isMenuOpen ? 'navbarLinks active' : 'navbarLinks'}>
+                    <Link className='navbarMenu' to={'/'}>Main</Link>
+                    <Link className='navbarMenu' to={'/About'}>About</Link>
+                    <Link className='navbarMenu' to={'/Community'}>Community</Link>
+                    <Link className='navbarMenu' to={'/ChatBot'}>ChatBot</Link>
+                </div>
 
-                   {/* 로그인*/}
-                   {isLoggedIn ? (
+                {/* 로그인 */}
+                {isLoggedIn ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
                     <Login onLogin={handleLogin} />
                 )}
                 <div className='join'>
-                    <Link className='navbarMenu' to={'/signUp'}>회원가입</Link>
+                    <Link className='navbarMenu' to={'/MemberChoice'}>회원가입</Link>
                 </div>
             </div>
         </div>
