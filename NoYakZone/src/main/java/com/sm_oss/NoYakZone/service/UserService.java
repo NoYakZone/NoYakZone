@@ -47,4 +47,20 @@ public class UserService {
         Optional<UserDto> user = userRepository.findById(id);
         return user.orElse(null);
     }
+
+    public UserDto updateUser(String id, UserDto userDto) {
+        Optional<UserDto> existingUser = userRepository.findById(id);
+        if (existingUser.isPresent()) {
+            UserDto userToUpdate = existingUser.get();
+            userToUpdate.setName(userDto.getName());
+            userToUpdate.setPassword(userDto.getPassword());
+            userToUpdate.setBirth(userDto.getBirth());
+            userToUpdate.setPhone(userDto.getPhone());
+            userToUpdate.setEmail(userDto.getEmail());
+            userToUpdate.setAddress(userDto.getAddress());
+            userToUpdate.setOfficial(userDto.isOfficial());
+            return userRepository.save(userToUpdate);
+        }
+        return null;
+    }
 }
