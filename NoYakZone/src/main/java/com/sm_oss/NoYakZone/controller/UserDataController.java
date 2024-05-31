@@ -45,11 +45,14 @@ public class UserDataController {
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
         boolean authenticated = userService.authenticateUser(userDto.getId(), userDto.getPassword());
         if (authenticated) {
-            return ResponseEntity.ok().body("로그인 가능");
+            UserDto authenticatedUser = userService.findById(userDto.getId());
+            return ResponseEntity.ok()
+                    .body("로그인 가능. 사용자 권한: " + (authenticatedUser.isOfficial() ? "수사자" : "일반 사용자"));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 불가능");
         }
     }
+
 }
 
 // userDto json 예시

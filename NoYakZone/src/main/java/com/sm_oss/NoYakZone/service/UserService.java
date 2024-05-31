@@ -42,19 +42,9 @@ public class UserService {
     public boolean existsById(String id) {
         return userRepository.existsById(id);
     }
-}
 
-
-/*
-userDto json 예시
-{
-    "id": "tempId",
-    "name": "tempName",
-    "password": "tempPW",
-    "birth": "010101",
-    "phone": "01000000000",
-    "email": "a@a.com",
-    "address": "home sweet home",
-    "official": true
+    public UserDto findById(String id) {
+        Optional<UserDto> user = userRepository.findById(id);
+        return user.orElse(null);
+    }
 }
- */
