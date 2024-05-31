@@ -51,3 +51,15 @@ public class UserDataController {
         }
     }
 }
+
+// userDto json 예시
+// {
+// "id": "tempId",
+// "name": "tempName",
+// "password": "tempPW",
+// "birth": "010616",
+// "phone": "01034445792",
+// "email": "a@a.com",
+// "address": "401",
+// "official": false
+// }
