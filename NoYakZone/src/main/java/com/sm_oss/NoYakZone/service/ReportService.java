@@ -2,7 +2,7 @@ package com.sm_oss.NoYakZone.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sm_oss.NoYakZone.model.ReportDto;
+import com.sm_oss.NoYakZone.model.Report;
 import com.sm_oss.NoYakZone.repository.ReportRepository;
 
 import java.time.LocalDateTime;
@@ -15,24 +15,24 @@ public class ReportService {
     @Autowired
     private ReportRepository reportRepository;
 
-    public ReportDto createReport(ReportDto reportDto) {
+    public Report createReport(Report reportDto) {
         reportDto.setDate(LocalDateTime.now());
         return reportRepository.save(reportDto);
     }
 
-    public ReportDto getReportById(int id) {
-        Optional<ReportDto> report = reportRepository.findById(id);
+    public Report getReportById(int id) {
+        Optional<Report> report = reportRepository.findById(id);
         return report.orElse(null);
     }
 
-    public List<ReportDto> getAllReports() {
+    public List<Report> getAllReports() {
         return reportRepository.findAll();
     }
 
-    public ReportDto updateReport(int id, ReportDto reportDto) {
-        Optional<ReportDto> existingReport = reportRepository.findById(id);
+    public Report updateReport(int id, Report reportDto) {
+        Optional<Report> existingReport = reportRepository.findById(id);
         if (existingReport.isPresent()) {
-            ReportDto updatedReport = existingReport.get();
+            Report updatedReport = existingReport.get();
             updatedReport.setUserId(reportDto.getUserId());
             updatedReport.setTitle(reportDto.getTitle());
             updatedReport.setText(reportDto.getText());

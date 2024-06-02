@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.sm_oss.NoYakZone.model.UserDto;
+import com.sm_oss.NoYakZone.model.User;
 import com.sm_oss.NoYakZone.service.UserService;
 
 import java.util.List;
@@ -21,16 +21,16 @@ public class UserDataController {
     private UserService userService;
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> addUser(@RequestBody User userDto) {
         if (userService.existsById(userDto.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 아이디");
         }
-        UserDto savedUser = userService.addUser(userDto);
+        User savedUser = userService.addUser(userDto);
         return ResponseEntity.ok(savedUser);
     }
 
@@ -44,10 +44,10 @@ public class UserDataController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> loginUser(@RequestBody User userDto) {
         boolean authenticated = userService.authenticateUser(userDto.getId(), userDto.getPassword());
         if (authenticated) {
-            UserDto authenticatedUser = userService.findById(userDto.getId());
+            User authenticatedUser = userService.findById(userDto.getId());
             return ResponseEntity.ok()
                     .body("로그인 가능. 사용자 권한: " + (authenticatedUser.isOfficial() ? "수사자" : "일반 사용자"));
         } else {
@@ -56,11 +56,11 @@ public class UserDataController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDto userDto) {
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User userDto) {
         if (!userService.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 아이디");
         }
-        UserDto updatedUser = userService.updateUser(id, userDto);
+        User updatedUser = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedUser);
     }
 }

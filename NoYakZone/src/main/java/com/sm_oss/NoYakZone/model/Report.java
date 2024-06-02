@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "report")
 @Data
-public class ReportDto {
+public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int index;

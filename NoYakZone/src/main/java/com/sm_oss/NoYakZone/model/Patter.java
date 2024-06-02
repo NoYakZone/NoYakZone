@@ -7,20 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "board")
+@Table(name = "\"patter\"")
 @Data
-public class BoardDto {
+public class Patter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int index;
-    private LocalDateTime date;
-    private String text;
-    private String place;
-    private String url;
-    private String id;
-    private String web;
-    private String picture;
+
+    private String word;
+    private String detail;
+    private Integer count;
 }

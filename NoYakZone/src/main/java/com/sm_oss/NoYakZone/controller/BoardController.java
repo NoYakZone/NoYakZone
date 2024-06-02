@@ -3,7 +3,7 @@ package com.sm_oss.NoYakZone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.sm_oss.NoYakZone.model.BoardDto;
+import com.sm_oss.NoYakZone.model.Board;
 import com.sm_oss.NoYakZone.service.BoardService;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public class BoardController {
     private BoardService boardService;
 
     @PostMapping
-    public ResponseEntity<?> createBoard(@RequestBody BoardDto BoardDto) {
+    public ResponseEntity<?> createBoard(@RequestBody Board BoardDto) {
         try {
-            BoardDto createdBoard = boardService.createBoard(BoardDto);
+            Board createdBoard = boardService.createBoard(BoardDto);
             return ResponseEntity.ok(createdBoard);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("실패: " + e.getMessage());
@@ -28,7 +28,7 @@ public class BoardController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getBoardById(@PathVariable int id) {
         try {
-            BoardDto BoardDto = boardService.getBoardById(id);
+            Board BoardDto = boardService.getBoardById(id);
             if (BoardDto != null) {
                 return ResponseEntity.ok(BoardDto);
             } else {
@@ -40,9 +40,9 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BoardDto>> getAllBoards() {
+    public ResponseEntity<List<Board>> getAllBoards() {
         try {
-            List<BoardDto> boards = boardService.getAllBoards();
+            List<Board> boards = boardService.getAllBoards();
             return ResponseEntity.ok(boards);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -50,9 +50,9 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateBoard(@PathVariable int id, @RequestBody BoardDto BoardDto) {
+    public ResponseEntity<?> updateBoard(@PathVariable int id, @RequestBody Board BoardDto) {
         try {
-            BoardDto updatedBoard = boardService.updateBoard(id, BoardDto);
+            Board updatedBoard = boardService.updateBoard(id, BoardDto);
             if (updatedBoard != null) {
                 return ResponseEntity.ok(updatedBoard);
             } else {

@@ -1,6 +1,6 @@
 package com.sm_oss.NoYakZone.service;
 
-import com.sm_oss.NoYakZone.model.UserDto;
+import com.sm_oss.NoYakZone.model.User;
 import com.sm_oss.NoYakZone.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserDto> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public UserDto addUser(UserDto user) {
+    public User addUser(User user) {
         return userRepository.save(user);
     }
 
@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public boolean authenticateUser(String id, String password) {
-        Optional<UserDto> user = userRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             return true;
         }
@@ -44,15 +44,15 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
-    public UserDto findById(String id) {
-        Optional<UserDto> user = userRepository.findById(id);
+    public User findById(String id) {
+        Optional<User> user = userRepository.findById(id);
         return user.orElse(null);
     }
 
-    public UserDto updateUser(String id, UserDto userDto) {
-        Optional<UserDto> existingUser = userRepository.findById(id);
+    public User updateUser(String id, User userDto) {
+        Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
-            UserDto userToUpdate = existingUser.get();
+            User userToUpdate = existingUser.get();
             userToUpdate.setName(userDto.getName());
             userToUpdate.setPassword(userDto.getPassword());
             userToUpdate.setBirth(userDto.getBirth());

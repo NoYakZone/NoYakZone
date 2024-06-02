@@ -2,7 +2,7 @@ package com.sm_oss.NoYakZone.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sm_oss.NoYakZone.model.BoardDto;
+import com.sm_oss.NoYakZone.model.Board;
 import com.sm_oss.NoYakZone.repository.BoardRepository;
 
 import java.time.LocalDateTime;
@@ -15,24 +15,24 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    public BoardDto createBoard(BoardDto BoardDto) {
+    public Board createBoard(Board BoardDto) {
         BoardDto.setDate(LocalDateTime.now());
         return boardRepository.save(BoardDto);
     }
 
-    public BoardDto getBoardById(int id) {
-        Optional<BoardDto> board = boardRepository.findById(id);
+    public Board getBoardById(int id) {
+        Optional<Board> board = boardRepository.findById(id);
         return board.orElse(null);
     }
 
-    public List<BoardDto> getAllBoards() {
+    public List<Board> getAllBoards() {
         return boardRepository.findAll();
     }
 
-    public BoardDto updateBoard(int id, BoardDto BoardDto) {
-        Optional<BoardDto> existingBoard = boardRepository.findById(id);
+    public Board updateBoard(int id, Board BoardDto) {
+        Optional<Board> existingBoard = boardRepository.findById(id);
         if (existingBoard.isPresent()) {
-            BoardDto updatedBoard = existingBoard.get();
+            Board updatedBoard = existingBoard.get();
             updatedBoard.setText(BoardDto.getText());
             updatedBoard.setPlace(BoardDto.getPlace());
             updatedBoard.setUrl(BoardDto.getUrl());

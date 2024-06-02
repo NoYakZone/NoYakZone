@@ -3,7 +3,7 @@ package com.sm_oss.NoYakZone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.sm_oss.NoYakZone.model.ReportDto;
+import com.sm_oss.NoYakZone.model.Report;
 import com.sm_oss.NoYakZone.service.ReportService;
 import java.util.List;
 
@@ -15,9 +15,9 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<?> createReport(@RequestBody ReportDto reportDto) {
+    public ResponseEntity<?> createReport(@RequestBody Report reportDto) {
         try {
-            ReportDto createdReport = reportService.createReport(reportDto);
+            Report createdReport = reportService.createReport(reportDto);
             return ResponseEntity.ok(createdReport);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("실패: " + e.getMessage());
@@ -27,7 +27,7 @@ public class ReportController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getReportById(@PathVariable int id) {
         try {
-            ReportDto report = reportService.getReportById(id);
+            Report report = reportService.getReportById(id);
             if (report != null) {
                 return ResponseEntity.ok(report);
             } else {
@@ -39,9 +39,9 @@ public class ReportController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ReportDto>> getAllReports() {
+    public ResponseEntity<List<Report>> getAllReports() {
         try {
-            List<ReportDto> reports = reportService.getAllReports();
+            List<Report> reports = reportService.getAllReports();
             return ResponseEntity.ok(reports);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -49,9 +49,9 @@ public class ReportController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateReport(@PathVariable int id, @RequestBody ReportDto reportDto) {
+    public ResponseEntity<?> updateReport(@PathVariable int id, @RequestBody Report reportDto) {
         try {
-            ReportDto updatedReport = reportService.updateReport(id, reportDto);
+            Report updatedReport = reportService.updateReport(id, reportDto);
             if (updatedReport != null) {
                 return ResponseEntity.ok(updatedReport);
             } else {
