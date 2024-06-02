@@ -12,7 +12,7 @@ import com.sm_oss.NoYakZone.service.UserService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // 새롭게 추가
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/userData")
 public class UserDataController {
@@ -76,4 +76,3 @@ public class UserDataController {
 // "address": "401",
 // "official": false
 // }
-

@@ -1,7 +1,8 @@
 package com.sm_oss.NoYakZone.service;
 
 import com.sm_oss.NoYakZone.model.UserDto;
-import com.sm_oss.NoYakZone.model.UserRepository;
+import com.sm_oss.NoYakZone.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
