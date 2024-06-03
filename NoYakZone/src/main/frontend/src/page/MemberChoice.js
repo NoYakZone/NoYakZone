@@ -1,20 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import SignUpGeneral from './SignUpGeneral';
+import SignUpPolice from './SignUpPolice';
 import '../CSS/MemberChoice.css';
 
 const MemberChoice = () => {
+    const [selectedForm, setSelectedForm] = useState('general');
+
+    const handleButtonClick = (form) => {
+        setSelectedForm(form);
+    };
+
     return (
         <div className="page-container">
             <div className="content-wrap">
                 <h2>MemberChoice Page</h2>
                 <div className="login-options">
-                    <Link to="/signUpGeneral">
-                        <button className="login-button">일반인</button>
-                    </Link>
-                    <Link to="/signUpPolice">
-                        <button className="login-button">경찰</button>
-                    </Link>
+                    <button
+                        className={`login-button ${selectedForm === 'general' ? 'selected' : ''}`}
+                        onClick={() => handleButtonClick('general')}
+                    >
+                        일반인
+                    </button>
+                    <button
+                        className={`login-button ${selectedForm === 'police' ? 'selected' : ''}`}
+                        onClick={() => handleButtonClick('police')}
+                    >
+                        경찰
+                    </button>
+                </div>
+                <div className="form-container">
+                    {selectedForm === 'general' && <SignUpGeneral />}
+                    {selectedForm === 'police' && <SignUpPolice />}
                 </div>
             </div>
         </div>

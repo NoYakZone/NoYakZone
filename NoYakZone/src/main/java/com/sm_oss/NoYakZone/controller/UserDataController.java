@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.sm_oss.NoYakZone.model.User;
 import com.sm_oss.NoYakZone.service.UserService;
@@ -34,9 +33,15 @@ public class UserDataController {
         return ResponseEntity.ok(savedUser);
     }
 
+    @GetMapping("/checkId/{id}")
+    public ResponseEntity<Boolean> checkIdAvailability(@PathVariable("id") String id) {
+        boolean exists = userService.existsById(id);
+        return ResponseEntity.ok(!exists);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(@PathVariable String id) {
+    public void deleteUser(@PathVariable("id") String id) {
         boolean deleted = userService.deleteUserById(id);
         if (!deleted) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 아이디");
@@ -56,7 +61,7 @@ public class UserDataController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User userDto) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @RequestBody User userDto) {
         if (!userService.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 아이디");
         }
