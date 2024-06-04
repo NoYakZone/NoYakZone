@@ -38,3 +38,5 @@ out/
 ### VS Code ###
 .vscode/
 
+### Custom ###
+/c/thanks/NoYakZone/NoYakZone/src/main/resources/application-private.properties
