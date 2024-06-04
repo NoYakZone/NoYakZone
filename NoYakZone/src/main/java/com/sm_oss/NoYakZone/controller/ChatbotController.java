@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sm_oss.NoYakZone.model.ChatLogDto;
+import com.sm_oss.NoYakZone.model.ChatLog;
 import com.sm_oss.NoYakZone.service.ChatLogService;
 
 class ChatRequest {//입력 폼
@@ -47,7 +47,7 @@ public class ChatbotController {
      */
 
      @GetMapping //사용자의 모든 대화 기록 가져오기
-     public List<ChatLogDto> getMessageHistory(@RequestParam String id){
+     public List<ChatLog> getMessageHistory(@RequestParam String id){
         return chatLogService.findAllByUserId(id);
      }//예시 : http://localhost:7890/chatbot?id=qwer
 }

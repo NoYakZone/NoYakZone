@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "\"chatlog\"")
 @Data
 
-public class ChatLogDto {
+public class ChatLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PostgreSQL의 SERIAL을 위한 설정
     private Long index; // SERIAL 타입에 맞게 Long 타입을 사용

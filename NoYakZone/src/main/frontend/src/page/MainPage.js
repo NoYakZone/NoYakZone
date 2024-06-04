@@ -2,9 +2,8 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
-import ChatBot from './ChatBot';
 import '../CSS/MainPage.css';
 
 import poster1 from '../image/마약포스터1.jpg';
@@ -25,43 +24,34 @@ const MainPage = () => {
         history.push('/ChatBot');
     };
 
-
     return (
         <div className='MainContainer'>
-            <ChatBot />
             <div className='Content'>
                 <div className='ServiceInfo'>
                     <h2>서비스 소개</h2>
                     <p className='serviceGoal'>
-                        슬라이드로 서비스 목표 쓰고 설명.
+                        우리의 사명은 마약 사용을 줄이고, 이를 통해 사회의 안전과 건강을 증진하는 것입니다.
                     </p>
                     <p className='autoPlay'>
-                        AutoPlay도 가능하면 쓸수있게
+                        다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.
                     </p>
 
-                    <Swiper 
-                        navigation={true} 
-                        pagination={{ clickable: true }}
-                        modules={[Navigation, Pagination]} 
-                        className="mySwiper"
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                    >
-                        <SwiperSlide>
-                            <div className="con">
-                                <div className="txtwrap">
-                                    <h3>Making Tomorrow Better</h3>
-                                    <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
-                                </div>
-                                <div className="ctr">
-                                    <div className="vprev" tabIndex="0" role="button" aria-label="Previous slide"></div>
-                                    <div className="swiper-pagination vpaging swiper-pagination-clickable swiper-pagination-bullets"></div>
-                                    <div className="vnext" tabIndex="0" role="button" aria-label="Next slide"></div>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide><img src={poster1} alt="Poster 1" /></SwiperSlide>
-                        <SwiperSlide><img src={poster2} alt="Poster 2" /></SwiperSlide>
-                    </Swiper>
+                    <div className="slideContent">
+                        <div className="slideText">
+                            <h3>Making Tomorrow Better</h3>
+                            <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
+                        </div>
+                        <Swiper 
+                            navigation={true} 
+                            pagination={{ clickable: true }}
+                            modules={[Navigation, Pagination, Autoplay]} 
+                            className="mySwiper"
+                            autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        >
+                            <SwiperSlide><img src={poster1} alt="Poster 1" className="poster-image" /></SwiperSlide>
+                            <SwiperSlide><img src={poster2} alt="Poster 2" className="poster-image" /></SwiperSlide>
+                        </Swiper>
+                    </div>
                 </div>
 
                 <div className='GoAboutUsPage' onClick={goToAboutPage}>

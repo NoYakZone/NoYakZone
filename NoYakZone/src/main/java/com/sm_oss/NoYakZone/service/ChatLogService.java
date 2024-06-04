@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
-import com.sm_oss.NoYakZone.model.ChatLogDto;
-import com.sm_oss.NoYakZone.model.ChatLogRepository;
+import com.sm_oss.NoYakZone.model.ChatLog;
+import com.sm_oss.NoYakZone.repository.ChatLogRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class ChatLogService {
     private static List<String> conversationHistory = new ArrayList<>();
 
     public String getResponse(String id, String message) {// api호출 시 첫 실행
-        List<ChatLogDto> recentLogs = findLatestChatLogs(id);//최신 대화내용 가져오기
+        List<ChatLog> recentLogs = findLatestChatLogs(id);//최신 대화내용 가져오기
         updateConversationHistory(recentLogs);//최신 대화내용 대화이력에 추가
         
         updateConversationHistory("user", message);
@@ -40,9 +41,9 @@ public class ChatLogService {
         return res;
     }
 
-    private void updateConversationHistory(List<ChatLogDto> recentLogs) {
+    private void updateConversationHistory(List<ChatLog> recentLogs) {
         conversationHistory.clear(); // 기존 대화 이력 초기화
-        for (ChatLogDto log : recentLogs) {
+        for (ChatLog log : recentLogs) {
             String role = log.isBot() ? "system" : "user";
             String content = log.getText();
             updateConversationHistory(role, content);
@@ -120,12 +121,12 @@ public class ChatLogService {
         return "";
     }
 
-    public List<ChatLogDto> findAllByUserId(String userId) {//사용자에 대한 모든 대화기록 불러오기
+    public List<ChatLog> findAllByUserId(String userId) {//사용자에 대한 모든 대화기록 불러오기
         return chatLogRepository.findByUserId(userId);
     }
 
-    public ChatLogDto insertChatLog(String userId, String text, boolean bot) {//챗봇 대화내용 insert
-        ChatLogDto newChatLog = new ChatLogDto();
+    public ChatLog insertChatLog(String userId, String text, boolean bot) {//챗봇 대화내용 insert
+        ChatLog newChatLog = new ChatLog();
         newChatLog.setUserId(userId); // userId 설정
         newChatLog.setDate(LocalDateTime.now()); // 현재 시간으로 date 설정
         newChatLog.setText(text); // text 설정
@@ -135,8 +136,8 @@ public class ChatLogService {
         return chatLogRepository.save(newChatLog);
     }
 
-    public List<ChatLogDto> findLatestChatLogs(String userId) {//최신 대화기록 불러오기
-        List<ChatLogDto> allLogs = chatLogRepository.findByUserId(userId);
+    public List<ChatLog> findLatestChatLogs(String userId) {//최신 대화기록 불러오기
+        List<ChatLog> allLogs = chatLogRepository.findByUserId(userId);
         return allLogs.stream()
                 .sorted((log1, log2) -> log2.getDate().compareTo(log1.getDate())) // 최신순으로 정렬
                 .limit(10) // 최신 10개만 선택

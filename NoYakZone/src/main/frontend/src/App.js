@@ -10,9 +10,14 @@ import Navigate from './component/Navigate';
 import MemberChoice from './page/MemberChoice';
 import SignUpGeneral from './page/SignUpGeneral';
 import SignUpPolice from './page/SignUpPolice';
-import ChatBot from './page/ChatBot';
+import CheckList from './page/CheckList';
 import FindId from './page/FindId';
 import FindPassword from './page/FindPassword';
+import Investigation from './page/Investigation';
+
+import Contact from './page/Contact';
+import PrivacyPolicy from './page/PrivacyPolicy';
+
 
 function App() {
     return (
@@ -26,9 +31,13 @@ function App() {
                     <Route path="/MemberChoice" component={MemberChoice} />
                     <Route path="/signUpPolice" component={SignUpPolice} />
                     <Route path="/signUpGeneral" component={SignUpGeneral} />
-                    <Route path="/ChatBot" component={ChatBot} />
+                    <Route path="/CheckList" component={CheckList} />
                     <Route path="/findPassword" component={FindPassword} />
                     <Route path="/findId" component={FindId} />
+                    <Route path="/Investigation" component={Investigation} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/privacy" component={PrivacyPolicy} />
+
 
                 </div>
                 <Footer />
