@@ -1,91 +1,139 @@
+/* General container styling */
 .container {
     width: 80%;
     margin: 0 auto;
-}
-
-.search-bar {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  /* Search bar styling */
+  .search-bar {
     margin-bottom: 20px;
-}
-
-.slang-list {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Slang list styling */
+  .slang-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-}
-
-.slang-item {
-    flex: 1 1 calc(33.333% - 10px);
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .slang-item {
+    flex: 1 1 calc(33.333% - 20px);
     box-sizing: border-box;
     padding: 20px;
     border: 1px solid #ccc;
     text-align: center;
     cursor: pointer;
-}
-
-.slang-item h3 {
+    border-radius: 5px;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .slang-item.empty {
+    visibility: hidden;
+  }
+  
+  .slang-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slang-item h3 {
     margin: 0;
     font-size: 1.2em;
-}
-
-.pagination {
+  }
+  
+  /* Pagination styling */
+  .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-.pagination button {
+  }
+  
+  .pagination button {
     margin: 0 5px;
-    padding: 5px 10px;
-}
-
-.pagination button.active {
-    font-weight: bold;
-    background-color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
     color: white;
-}
-
-/* Community.css */
-.modal {
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .pagination button:hover {
+    background: #0056b3;
+  }
+  
+  .pagination button.active {
+    font-weight: bold;
+    background-color: #0056b3;
+  }
+  
+  /* Modal styling */
+  .modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     width: 80%;
     max-width: 500px;
-}
-
-.modal-header {
+  }
+  
+  .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.modal-header h1 {
+    margin-bottom: 20px;
+  }
+  
+  .modal-header h1 {
     font-size: 24px;
     margin: 0;
-}
-
-.modal-body p {
+  }
+  
+  .modal-body p {
     font-size: 16px;
     color: #606060;
     line-height: 1.6;
-}
-
-.modal-close {
+  }
+  
+  .modal-close {
     cursor: pointer;
     background: none;
     border: none;
     font-size: 24px;
     line-height: 1;
-}
-
-.modal-overlay {
+    color: #aaa;
+    transition: color 0.3s;
+  }
+  
+  .modal-close:hover {
+    color: #000;
+  }
+  
+  .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -93,4 +141,5 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
-}
+  }
+  

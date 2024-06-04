@@ -7,24 +7,30 @@
   margin: 0;
   padding: 0;
 }
-html, body {
+
+html,
+body {
   width: 100%;
   height: 100%;
 }
+
 html {
   overflow-y: scroll;
   font-size: 17px;
 }
+
 @media (max-width: 1399px) {
   html {
     font-size: 16px;
   }
 }
+
 @media (max-width: 812px) {
   html {
     font-size: 15px;
   }
 }
+
 body {
   background-color: #fff;
   word-break: keep-all;
@@ -32,77 +38,130 @@ body {
   -moz-text-size-adjust: 100% !important;
   -ms-text-size-adjust: 100% !important;
 }
-body, h1, h2, h3, h4, h5, h6, th, td, li, dt, dd, a, p, input, textarea, select, option, button {
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+li,
+dt,
+dd,
+a,
+p,
+input,
+textarea,
+select,
+option,
+button {
   color: #555;
   font-family: "Poppins", "Noto Sans KR", "돋움", dotum, sans-serif;
   font-weight: normal;
 }
+
 p {
   line-height: 1.8em;
   font-weight: 400;
 }
-img, fieldset, iframe {
+
+img,
+fieldset,
+iframe {
   border: 0 none;
 }
-ul, ol, li {
+
+ul,
+ol,
+li {
   list-style: none;
 }
-em, address {
+
+em,
+address {
   font-style: normal;
 }
-img, input, select, textarea {
+
+img,
+input,
+select,
+textarea {
   vertical-align: middle;
 }
+
 a {
   color: #7d7d7d;
   text-decoration: none;
   cursor: pointer;
 }
+
 a:hover {
   color: #333;
   text-decoration: none;
 }
-button, label {
+
+button,
+label {
   cursor: pointer;
-  _cursor /**/: hand;
+  _cursor
+  /**/
+  : hand;
 }
+
 button * {
   position: relative;
 }
+
 textarea {
   overflow: auto;
 }
+
 option {
   padding-right: 6px;
 }
-.input_text, textarea {
+
+.input_text,
+textarea {
   *margin: -1px 0;
   padding-right: 1px;
 }
-.input_check, .input_radio {
+
+.input_check,
+.input_radio {
   width: 13px;
   height: 13px;
 }
-.blind, legend, caption {
+
+.blind,
+legend,
+caption {
   text-indent: -9999px;
   font-size: 0;
   line-height: 0;
   overflow: hidden;
 }
+
 hr {
   display: none;
 }
+
 legend {
   *width: 0;
 }
+
 :root legend {
   margin-top: -1px;
   font-size: 0;
   line-height: 0;
 }
+
 caption {
   *line-height: 0;
 }
+
 img {
   max-width: 100%;
 }
@@ -124,14 +183,16 @@ img {
   gap: 20px;
 }
 
-.ServiceInfo, .DrugInfo {
+.ServiceInfo,
+.DrugInfo {
   padding: 20px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.serviceGoal, .autoPlay {
+.serviceGoal,
+.autoPlay {
   color: #333;
   background-color: #e9ecef;
   padding: 10px;

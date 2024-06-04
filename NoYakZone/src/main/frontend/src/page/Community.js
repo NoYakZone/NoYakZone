@@ -44,6 +44,21 @@ const Community = () => {
     setSelectedSlang(null);
   };
 
+  const renderSlangItems = () => {
+    const items = currentItems.map((slang) => (
+      <div key={slang.index} className="slang-item" onClick={() => handleClick(slang)}>
+        <h3>{slang.word}</h3>
+      </div>
+    ));
+
+    // Fill remaining space with empty items if there are fewer than itemsPerPage
+    for (let i = items.length; i < itemsPerPage; i++) {
+      items.push(<div key={`empty-${i}`} className="slang-item empty"></div>);
+    }
+
+    return items;
+  };
+
   return (
     <div className="container">
       <h2>마약 은어 소개 페이지</h2>
@@ -52,15 +67,14 @@ const Community = () => {
           type="text"
           placeholder="검색어를 입력하세요..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);  // Reset to the first page when search term changes
+          }}
         />
       </div>
       <div className="slang-list">
-        {currentItems.map((slang) => (
-          <div key={slang.index} className="slang-item" onClick={() => handleClick(slang)}>
-            <h3>{slang.word}</h3>
-          </div>
-        ))}
+        {renderSlangItems()}
       </div>
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
