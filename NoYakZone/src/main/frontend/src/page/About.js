@@ -5,6 +5,7 @@ import fentanyl from '../image/펜타닐.png';
 import ketamine from '../image/케타민.png';
 import searchImg from '../image/검색.png';
 import KPIC from '../image/약학정보원.png';
+import ChatBot from './ChatBot';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const getChosung = (text) => {
@@ -117,6 +118,7 @@ const About = () => {
                     </TransitionGroup>
                 </div>
             </div>
+            <ChatBot />
         </div>
     );
 };
