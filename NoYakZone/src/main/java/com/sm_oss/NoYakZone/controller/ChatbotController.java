@@ -26,6 +26,7 @@ class ChatRequest {//입력 폼
     }
 }
 
+
 @RestController
 @RequestMapping("/chatbot")
 public class ChatbotController {

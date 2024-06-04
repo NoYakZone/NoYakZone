@@ -4,8 +4,8 @@ import drug from '../image/drug.png';
 import fentanyl from '../image/펜타닐.png'; 
 import ketamine from '../image/케타민.png';
 import searchImg from '../image/검색.png';
-import KPIC from '../image/약학정보원.png'; // 약학정보원 이미지 import
-
+import KPIC from '../image/약학정보원.png';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const getChosung = (text) => {
     const chosung = [
@@ -21,35 +21,16 @@ const getChosung = (text) => {
         .join('');
 };
 
-
 const About = () => {
     const [keyword, setKeyword] = useState('');
     const [results, setResults] = useState([]);
     const [initial, setInitial] = useState('');
 
-    const getChosung = (text) => {
-        const chosung = [
-            'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-        ];
-        return text
-            .split('')
-            .map(char => {
-                const code = char.charCodeAt(0) - 44032;
-                if (code < 0 || code > 11171) return char;
-                return chosung[Math.floor(code / 588)];
-            })
-            .join('');
-    };
-
     const handleSearch = (event) => {
         event.preventDefault();
-        // 예시 결과 데이터 (실제 구현에서는 API 호출 등을 통해 데이터 가져옴)
         const exampleResults = [
             { id: 1, name: '펜타닐(Fentanyl)', imageUrl: fentanyl, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/펜타닐(fentanyl).pdf' },
             { id: 2, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
-            { id: 3, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
-            { id: 4, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
-            { id: 5, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
         ];
         const filteredResults = exampleResults.filter(result => result.name.includes(keyword));
         setResults(filteredResults);
@@ -57,7 +38,6 @@ const About = () => {
 
     const handleInitialSearch = (initial) => {
         setInitial(initial);
-        // 예시로 초성에 따른 결과 필터링 로직
         const exampleResults = [
             { id: 1, name: '펜타닐(Fentanyl)', imageUrl: fentanyl, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/펜타닐(fentanyl).pdf' },
             { id: 2, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
@@ -74,11 +54,18 @@ const About = () => {
             <div className='drugImg'>
                 <div><img src={drug} alt="drug" /></div>
             </div>
-            <div>slide2</div>
-            <div>slide3</div>
+            <div className="about-description">
+                <p>
+                    우리의 사명은 마약 사용을 줄이고, 이를 통해 사회의 안전과 건강을 증진하는 것입니다. 우리는 다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.
+                </p>
+                <ul>
+                    <li><strong>챗봇 상담 서비스</strong>: 일반 사람들은 우리의 챗봇을 통해 익명으로 상담을 받을 수 있습니다. 이 서비스는 마약 사용 문제를 겪고 있거나, 이를 예방하고 싶은 사람들에게 유용한 정보를 제공하고, 필요한 경우 전문 상담사와의 연결을 돕습니다.</li>
+                    <li><strong>마약 은어 정보 제공</strong>: 일반인들은 마약과 관련된 다양한 은어와 용어에 대한 정보를 제공받을 수 있습니다. 이를 통해 마약 문제를 보다 쉽게 인식하고 예방할 수 있도록 돕습니다.</li>
+                    <li><strong>데이터 제공</strong>: 경찰에게는 마약과 관련된 데이터를 제공합니다. 이를 통해 마약 범죄를 보다 효과적으로 추적하고 대응할 수 있도록 지원합니다.</li>
+                </ul>
+            </div>
             <div className="search-page">
                 <div className="innerwrap">
-                    <h3 className="page_title1">통합검색</h3>
                     <form name="smartSearchForm" id="smartSearchForm" onSubmit={handleSearch}>
                         <div className="searchwrap">
                             <div className="innerwrap">
@@ -109,23 +96,25 @@ const About = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="search_results">
+                    <TransitionGroup className="search_results">
                         {results.length > 0 && (
-                            <div className="innerwrap">
-                                <div className="result"> 총 <span className="num">{results.length}</span>개의 결과가 있습니다.</div>
-                                <ul>
-                                    {results.map(result => (
-                                        <li key={result.id}>
-                                            <a href={result.link} target="_blank" rel="noopener noreferrer">
-                                                <div className="thumb"><img src={result.imageUrl} alt={result.name} /></div>
-                                                <div className="tit">{result.name}</div>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                            <CSSTransition timeout={300} classNames="fade">
+                                <div className="innerwrap">
+                                    <div className="result"> 총 <span className="num">{results.length}</span>개의 결과가 있습니다.</div>
+                                    <ul>
+                                        {results.map(result => (
+                                            <li key={result.id}>
+                                                <a href={result.link} target="_blank" rel="noopener noreferrer">
+                                                    <div className="thumb"><img src={result.imageUrl} alt={result.name} /></div>
+                                                    <div className="tit">{result.name}</div>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </CSSTransition>
                         )}
-                    </div>
+                    </TransitionGroup>
                 </div>
             </div>
         </div>
