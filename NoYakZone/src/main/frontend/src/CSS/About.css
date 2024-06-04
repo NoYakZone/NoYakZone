@@ -1,6 +1,13 @@
+/* About.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .drugImg img {
-    height: 300px; /* 원하는 고정 높이 설정 */
-    width: auto; /* 가로 비율 유지 */
+    height: 300px;
+    width: auto;
 }
 
 .search-page .innerwrap {
@@ -65,7 +72,7 @@
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 반응형 그리드 설정 */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     width: 100%;
 }
@@ -78,35 +85,56 @@
 }
 
 .search_results .thumb img {
-    height: 100px; /* 썸네일 이미지 높이 설정 */
+    height: 100px;
     width: auto;
     margin-bottom: 10px;
 }
 
 .searchImg img {
-    height: 24px; /* 검색 아이콘 높이 설정 */
+    height: 24px;
     width: 24px;
 }
 
 .text_search button img {
-    height: 16px; /* 버튼 내 아이콘 이미지 높이 설정 */
+    height: 16px;
     width: 16px;
 }
 
 .text_search button:last-child img {
-    height: 24px; /* 약학정보원 이미지 높이 설정 */
+    height: 24px;
     width: 24px;
+}
+
+.about-description {
+    margin: 20px 0;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }
 
 /* 미디어 쿼리 설정 */
 @media (min-width: 1024px) {
     .search_results ul {
-        grid-template-columns: repeat(4, 1fr); /* 전체 화면일 때 4개의 아이템 */
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 1023px) {
     .search_results ul {
-        grid-template-columns: repeat(2, 1fr); /* 절반 화면일 때 2개의 아이템 */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
