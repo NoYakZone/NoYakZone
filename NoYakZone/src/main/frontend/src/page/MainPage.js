@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
+import ChatBot from './ChatBot';
 import '../CSS/MainPage.css';
 
 import poster1 from '../image/마약포스터1.jpg';
@@ -27,6 +28,7 @@ const MainPage = () => {
 
     return (
         <div className='MainContainer'>
+            <ChatBot />
             <div className='Content'>
                 <div className='ServiceInfo'>
                     <h2>서비스 소개</h2>
