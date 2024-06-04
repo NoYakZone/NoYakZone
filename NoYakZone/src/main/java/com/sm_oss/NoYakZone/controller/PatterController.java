@@ -8,6 +8,7 @@ import com.sm_oss.NoYakZone.service.PatterService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/patter")
 public class PatterController {
 
