@@ -5,14 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.sm_oss.NoYakZone.model.UserDto;
+import com.sm_oss.NoYakZone.model.User;
 import com.sm_oss.NoYakZone.service.UserService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // 새롭게 추가
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/userData")
 public class UserDataController {
@@ -21,22 +20,28 @@ public class UserDataController {
     private UserService userService;
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> addUser(@RequestBody User userDto) {
         if (userService.existsById(userDto.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 아이디");
         }
-        UserDto savedUser = userService.addUser(userDto);
+        User savedUser = userService.addUser(userDto);
         return ResponseEntity.ok(savedUser);
+    }
+
+    @GetMapping("/checkId/{id}")
+    public ResponseEntity<Boolean> checkIdAvailability(@PathVariable("id") String id) {
+        boolean exists = userService.existsById(id);
+        return ResponseEntity.ok(!exists);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(@PathVariable String id) {
+    public void deleteUser(@PathVariable("id") String id) {
         boolean deleted = userService.deleteUserById(id);
         if (!deleted) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 아이디");
@@ -44,10 +49,10 @@ public class UserDataController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> loginUser(@RequestBody User userDto) {
         boolean authenticated = userService.authenticateUser(userDto.getId(), userDto.getPassword());
         if (authenticated) {
-            UserDto authenticatedUser = userService.findById(userDto.getId());
+            User authenticatedUser = userService.findById(userDto.getId());
             return ResponseEntity.ok()
                     .body("로그인 가능. 사용자 권한: " + (authenticatedUser.isOfficial() ? "수사자" : "일반 사용자"));
         } else {
@@ -56,11 +61,11 @@ public class UserDataController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDto userDto) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @RequestBody User userDto) {
         if (!userService.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 아이디");
         }
-        UserDto updatedUser = userService.updateUser(id, userDto);
+        User updatedUser = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedUser);
     }
 }
@@ -76,4 +81,3 @@ public class UserDataController {
 // "address": "401",
 // "official": false
 // }
-

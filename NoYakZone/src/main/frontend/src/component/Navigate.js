@@ -1,5 +1,5 @@
 import { Link, useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/Navigate.css';
 import Logo from '../image/Logo.png';
 
@@ -12,6 +12,15 @@ function Navigate() {
 
     const history = useHistory();
 
+    useEffect(() => {
+        const loggedInStatus = localStorage.getItem('isLoggedIn');
+        const storedUsername = localStorage.getItem('username');
+        if (loggedInStatus === 'true' && storedUsername) {
+            setIsLoggedIn(true);
+            setUsername(storedUsername);
+        }
+    }, []);
+
     const handleLogin = (username) => {
         setIsLoggedIn(true);
         setUsername(username);
@@ -20,6 +29,9 @@ function Navigate() {
     const handleLogout = () => {
         setIsLoggedIn(false);
         setUsername('');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        localStorage.removeItem('official');
     };
 
     const toggleMenu = () => {
@@ -51,7 +63,10 @@ function Navigate() {
 
                 {/* 로그인 */}
                 {isLoggedIn ? (
-                    <button onClick={handleLogout}>Logout</button>
+                    <div>
+                        <span>{username}</span>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
                 ) : (
                     <Login onLogin={handleLogin} />
                 )}
@@ -61,7 +76,6 @@ function Navigate() {
                 <div className='FindPasswordLink' onClick={goToFindPassword}>
                     <p>비밀번호 찾기</p>
                 </div>
-               
             </div>
         </div>
     );

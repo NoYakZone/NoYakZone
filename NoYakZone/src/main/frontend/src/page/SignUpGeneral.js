@@ -69,12 +69,12 @@ const SignUpGeneral = () => {
     const history = useHistory();
 
     const validateInputs = () => {
-        const userIdRegex = /^[a-zA-Z0-9]{4,15}$/;
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
+        const userIdRegex = /^[a-zA-Z0-9]{4,30}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,50}$/;
 
         if (!userIdRegex.test(formData.id)) {
             setIdValid(false);
-            setValidationMessage('아이디는 영어와 숫자만 포함하여 4~15 글자 사이여야 합니다.');
+            setValidationMessage('아이디는 영어와 숫자만 포함하여 4~30 글자 사이여야 합니다.');
             return false;
         } else {
             setIdValid(true);
@@ -82,7 +82,7 @@ const SignUpGeneral = () => {
 
         if (!passwordRegex.test(formData.password)) {
             setPasswordValid(false);
-            setValidationMessage('비밀번호는 영어와 숫자를 포함하여 8~15 글자 사이여야 합니다.');
+            setValidationMessage('비밀번호는 영어와 숫자를 포함하여 8~50 글자 사이여야 합니다.');
             return false;
         } else {
             setPasswordValid(true);
@@ -115,11 +115,19 @@ const SignUpGeneral = () => {
 
         if (validateInputs() && idValid) {
             const phoneNumber = `${formData.phone1}${formData.phone2}${formData.phone3}`;
+            if (phoneNumber.length !== 11) {
+                alert('전화번호는 총 11자리여야 합니다.');
+                return;
+            }
+
+            const birthDate = new Date(formData.birth);
+            const formattedBirth = `${birthDate.getFullYear().toString().slice(-2)}${("0" + (birthDate.getMonth() + 1)).slice(-2)}${("0" + birthDate.getDate()).slice(-2)}`;
+
             const userData = { 
                 id: formData.id,
                 name: formData.name,
                 password: formData.password,
-                birth: formData.birth,
+                birth: formattedBirth,
                 phone: phoneNumber,
                 email: formData.email,
                 address: formData.address,
@@ -179,10 +187,6 @@ const SignUpGeneral = () => {
                 <label htmlFor="address">
                     주소:
                     <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
-                </label>
-                <label htmlFor="official">
-                    공식 사용자:
-                    <input type="checkbox" id="official" name="official" checked={formData.official} onChange={handleChange} />
                 </label>
 
                 <button type="submit">회원가입</button>
