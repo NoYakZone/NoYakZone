@@ -58,7 +58,7 @@ function Navigate() {
                     <Link className='navbarMenu' to={'/'}>Main</Link>
                     <Link className='navbarMenu' to={'/About'}>About</Link>
                     <Link className='navbarMenu' to={'/Community'}>Community</Link>
-                    <Link className='navbarMenu' to={'/ChatBot'}>ChatBot</Link>
+                    <Link className='navbarMenu' to={'/CheckList'}>CheckList</Link>
                 </div>
 
                 {/* 로그인 */}

@@ -10,7 +10,7 @@ import Navigate from './component/Navigate';
 import MemberChoice from './page/MemberChoice';
 import SignUpGeneral from './page/SignUpGeneral';
 import SignUpPolice from './page/SignUpPolice';
-import ChatBot from './page/ChatBot';
+import CheckList from './page/CheckList';
 import FindId from './page/FindId';
 import FindPassword from './page/FindPassword';
 
@@ -26,7 +26,7 @@ function App() {
                     <Route path="/MemberChoice" component={MemberChoice} />
                     <Route path="/signUpPolice" component={SignUpPolice} />
                     <Route path="/signUpGeneral" component={SignUpGeneral} />
-                    <Route path="/ChatBot" component={ChatBot} />
+                    <Route path="/CheckList" component={CheckList} />
                     <Route path="/findPassword" component={FindPassword} />
                     <Route path="/findId" component={FindId} />
 
