@@ -24,7 +24,7 @@ public class ChatLogService {
     private ChatLogRepository chatLogRepository;
 
     @Value("${openai.api.key}")
-    private static String apiKey;//안되요오오오오오오오
+    private String apiKey;//안되요오오오오오오오
 
     private static List<String> conversationHistory = new ArrayList<>();
 
@@ -53,38 +53,10 @@ public class ChatLogService {
         // 대화 내용을 JSON 문자열로 변환
         String newEntry = "{\"role\": \"" + role + "\", \"content\": \"" + content.replace("\"", "\\\"") + "\"}";
 
-        // 대화를 추가하기 전에 토큰 수를 체크
-        // while (!isTokenLimitSafe(newEntry)) {
-        //     // 토큰 수가 안전한 상태가 될 때까지 이전 대화를 제거
-        //     if (!conversationHistory.isEmpty()) {
-        //         conversationHistory.remove(0); // 리스트의 첫 번째 항목을 제거
-        //     } else {
-        //         break; // 대화 기록이 비어있으면 중단
-        //     }
-        // }
-
-        // 대화 기록에 새 대화 추가
         conversationHistory.add(newEntry);
     }
 
-    // private boolean isTokenLimitSafe(String newEntry) {// 대략적인 토큰 수 체크를 위한 메서드
-    //     // 새로운 항목을 추가했을 때의 대략적인 문자 수
-    //     int estimatedSize = newEntry.length();
-    //     for (String entry : conversationHistory) {
-    //         estimatedSize += entry.length();
-    //     }
-
-    //     // 여기서는 단순화를 위해 한 토큰을 4글자로 가정
-    //     // 한글 : 한글자당 1토큰
-    //     // 영어 : 한 단어당 1토큰
-    //     // 따라서 영어가 유리
-    //     int estimatedTokens = estimatedSize / 4;
-
-    //     // 10K 토큰보다 적으면 안전하다고 가정
-    //     return estimatedTokens < 10000;
-    // }
-
-    private static String callChatGPT(String prompt) {// 실제 gpt api 사용
+    private String callChatGPT(String prompt) {// 실제 gpt api 사용
         try {
             URL url = new URL("https://api.openai.com/v1/chat/completions");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
