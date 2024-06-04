@@ -13,6 +13,11 @@ import SignUpPolice from './page/SignUpPolice';
 import CheckList from './page/CheckList';
 import FindId from './page/FindId';
 import FindPassword from './page/FindPassword';
+import Investigation from './page/Investigation';
+
+import Contact from './page/Contact';
+import PrivacyPolicy from './page/PrivacyPolicy';
+
 
 function App() {
     return (
@@ -29,6 +34,10 @@ function App() {
                     <Route path="/CheckList" component={CheckList} />
                     <Route path="/findPassword" component={FindPassword} />
                     <Route path="/findId" component={FindId} />
+                    <Route path="/Investigation" component={Investigation} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/privacy" component={PrivacyPolicy} />
+
 
                 </div>
                 <Footer />
