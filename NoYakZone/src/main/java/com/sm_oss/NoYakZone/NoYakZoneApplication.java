@@ -10,3 +10,11 @@ public class NoYakZoneApplication {
         SpringApplication.run(NoYakZoneApplication.class, args);
     }
 }
+/*
+스프링부트 실행
+cd "C:\visual studio code\springboot\NoYakZone\NoYakZone"
+.\gradlew bootRun
+
+빌드
+.\gradlew build
+ */
