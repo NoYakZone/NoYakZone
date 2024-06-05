@@ -95,6 +95,7 @@ const ReportPage = () => {
       userId: username,
     }));
     setIsModalOpen(true);
+
   };
 
   const closeModal = () => {

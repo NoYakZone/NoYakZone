@@ -3,8 +3,11 @@ package com.sm_oss.NoYakZone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import com.sm_oss.NoYakZone.model.Report;
 import com.sm_oss.NoYakZone.service.ReportService;
+import com.sm_oss.NoYakZone.service.S3ImageService;
+
 import java.util.List;
 
 @RestController
@@ -15,10 +18,24 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
+    @Autowired
+    private S3ImageService s3ImageService;
+
     @PostMapping
-    public ResponseEntity<?> createReport(@RequestBody Report reportDto) {
+    public ResponseEntity<?> createReport(@RequestParam("userId") String userId,
+                                          @RequestParam("title") String title,
+                                          @RequestParam("text") String text,
+                                          @RequestParam("link") String link,
+                                          @RequestParam("picture") MultipartFile picture) {
         try {
-            Report createdReport = reportService.createReport(reportDto);
+            String imageUrl = s3ImageService.upload(picture);
+            Report report = new Report();
+            report.setUserId(userId);
+            report.setTitle(title);
+            report.setText(text);
+            report.setLink(link);
+            report.setPicture(imageUrl);
+            Report createdReport = reportService.createReport(report);
             return ResponseEntity.ok(createdReport);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("실패: " + e.getMessage());
