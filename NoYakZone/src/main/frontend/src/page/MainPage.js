@@ -6,8 +6,11 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
 import '../CSS/MainPage.css';
 
-import poster1 from '../image/마약포스터1.jpg';
+import poster1 from '../image/마약포스터1.png';
 import poster2 from '../image/마약포스터2.png';
+import poster3 from '../image/마약포스터3.png';
+import poster4 from '../image/마약포스터4.png';
+import poster5 from '../image/마약포스터5.png';
 
 const MainPage = () => {
     const history = useHistory();
@@ -50,6 +53,9 @@ const MainPage = () => {
                         >
                             <SwiperSlide><img src={poster1} alt="Poster 1" className="poster-image" /></SwiperSlide>
                             <SwiperSlide><img src={poster2} alt="Poster 2" className="poster-image" /></SwiperSlide>
+                            <SwiperSlide><img src={poster3} alt="Poster 3" className="poster-image" /></SwiperSlide>
+                            <SwiperSlide><img src={poster4} alt="Poster 4" className="poster-image" /></SwiperSlide>
+                            <SwiperSlide><img src={poster5} alt="Poster 5" className="poster-image" /></SwiperSlide>
                         </Swiper>
                     </div>
                 </div>
