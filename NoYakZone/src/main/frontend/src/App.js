@@ -14,6 +14,7 @@ import CheckList from './page/CheckList';
 import FindId from './page/FindId';
 import FindPassword from './page/FindPassword';
 import Investigation from './page/Investigation';
+import ReportPage from './page/ReportPage';
 
 import Contact from './page/Contact';
 import PrivacyPolicy from './page/PrivacyPolicy';
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/Investigation" component={Investigation} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/privacy" component={PrivacyPolicy} />
+                    <Route path="/Report" component={ReportPage} />
 
 
                 </div>

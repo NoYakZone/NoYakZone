@@ -8,6 +8,7 @@ import com.sm_oss.NoYakZone.service.ReportService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/report")
 public class ReportController {
 

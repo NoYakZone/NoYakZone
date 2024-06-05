@@ -26,7 +26,7 @@ class ChatRequest {//입력 폼
     }
 }
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/chatbot")
 public class ChatbotController {
