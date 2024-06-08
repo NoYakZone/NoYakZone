@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../CSS/Community.css";
+import ChatBot from './ChatBot';
 
 const Community = () => {
   const [slangData, setSlangData] = useState([]);
@@ -103,6 +104,7 @@ const Community = () => {
           </div>
         </>
       )}
+      <ChatBot id={"qwer"}/>
     </div>
   );
 };
