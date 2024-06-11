@@ -1,4 +1,4 @@
- .chatbot-button {
+.chatbot-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -11,6 +11,9 @@
     font-size: 16px;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* flexbox 레이아웃을 사용합니다 */
+    justify-content: center; /* 가로축에서 중앙 정렬합니다 */
+    align-items: center; /* 세로축에서 중앙 정렬합니다 */
   }
   
   .chatbot-button:hover {
@@ -19,10 +22,10 @@
 
   .chatbot-window {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     right: 20px;
-    width: 300px;
-    height: 400px;
+    width: 500px;
+    height: 600px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -44,10 +47,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 3px;
   background-color: #f1f1f1;
   border-bottom: 1px solid #ccc;
 }
+
+/*******************************메세지 부분*******************************/
 
 .chatbot-messages {
     flex: 1;
@@ -55,13 +60,41 @@
     overflow-y: auto;
 }
 
-.chatbot-message {
+/* .chatbot-message {
     margin-bottom: 10px;
+} */
+
+.chatbot-message {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
 }
 
-.chatbot-message.user {
-    text-align: right;
+.bot-message {
+    justify-content: start;
 }
+
+.user-message {
+    justify-content: end;
+}
+
+.message-box {
+    display: inline-block; /* 텍스트 길이에 따라 크기 조정 */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    max-width: 70%; /* 메시지 박스가 부모 요소의 최대 너비를 넘지 않도록 설정 */
+    word-wrap: break-word; /* 너무 긴 단어가 있을 경우 줄바꿈 처리 */
+}
+
+.bot-message .message-box {
+    background-color: #007bff; /* 파란색 배경 */
+    color: #fff; /* 흰색 글자 */
+}
+
+/*******************************메세지 부분*******************************/
 
 .chatbot-input {
     display: flex;
@@ -71,17 +104,23 @@
 .chatbot-input input {
     flex: 1;
     padding: 10px;
+    font-size: 17px;
     border: none;
     border-radius: 0 0 0 8px;
     outline: none;
 }
 
 .chatbot-input button {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 13px;
+    padding-right: 13px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
     border-radius: 0 0 8px 0;
 }
 
@@ -92,6 +131,34 @@
 .close-button {
   cursor: pointer;
   background-color: transparent;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
   border: none;
-  font-size: 16px;
+}
+
+@keyframes slideInFromLeft {/*메세지가 나올 때 애니메이션*/
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.chatbot-window-visible {/*메세지가 나올 때 애니메이션*/
+    animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+@keyframes slideOutToLeft {/*메세지가 사라질 때 애니메이션*/
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.chatbot-window-hidden {/*메세지가 사라질 때 애니메이션*/
+    animation: slideOutToLeft 0.5s ease-out forwards;
 }

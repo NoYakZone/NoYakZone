@@ -28,6 +28,7 @@ class ChatRequest {//입력 폼
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/chatbot")
 public class ChatbotController {
 
@@ -35,7 +36,7 @@ public class ChatbotController {
     private ChatLogService chatLogService;
 
     @PostMapping("/chat")//봇에게 메세지 보내기
-    public String chat(@RequestBody ChatRequest chatRequest) {
+    public ChatLog chat(@RequestBody ChatRequest chatRequest) {
         return chatLogService.getResponse(chatRequest.getId(), chatRequest.getMessage());
     }
     /*
