@@ -23,10 +23,10 @@ public class ReportController {
 
     @PostMapping
     public ResponseEntity<?> createReport(@RequestParam("userId") String userId,
-                                          @RequestParam("title") String title,
-                                          @RequestParam("text") String text,
-                                          @RequestParam("link") String link,
-                                          @RequestParam("picture") MultipartFile picture) {
+            @RequestParam("title") String title,
+            @RequestParam("text") String text,
+            @RequestParam("link") String link,
+            @RequestParam("picture") MultipartFile picture) {
         try {
             String imageUrl = s3ImageService.upload(picture);
             Report report = new Report();

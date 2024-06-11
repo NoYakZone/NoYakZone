@@ -1,4 +1,3 @@
-// ReportModal.js
 import React, { useState } from "react";
 import axios from "axios";
 import "../CSS/ReportModal.css";
@@ -36,41 +35,42 @@ const ReportModal = ({ onClose, refreshReports }) => {
         <h2>New Report</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Title:
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
+              placeholder="제목"
             />
           </label>
           <label>
-            Text:
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               required
+              placeholder="내용"
             />
           </label>
           <label>
-            Link:
             <input
               type="url"
               value={link}
               onChange={(e) => setLink(e.target.value)}
+              placeholder="링크"
             />
           </label>
           <label>
-            Picture:
             <input
               type="file"
               onChange={(e) => setPicture(e.target.files[0])}
             />
           </label>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
+          <div className="button-group">
+            <button type="submit">신고하기</button>
+            <button type="button" onClick={onClose}>
+              취소
+            </button>
+          </div>
         </form>
       </div>
     </div>
