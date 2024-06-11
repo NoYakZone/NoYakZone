@@ -14,7 +14,7 @@ import CheckList from "./page/CheckList";
 import FindId from "./page/FindId";
 import FindPassword from "./page/FindPassword";
 import Investigation from "./page/Investigation";
-import ReportPage from "./page/ReportPage"; // ReportPage import 추가
+import ReportPage from "./page/ReportPage";
 
 import Contact from "./page/Contact";
 import PrivacyPolicy from "./page/PrivacyPolicy";
