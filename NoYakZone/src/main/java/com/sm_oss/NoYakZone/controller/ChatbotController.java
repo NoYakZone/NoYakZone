@@ -36,7 +36,7 @@ public class ChatbotController {
     private ChatLogService chatLogService;
 
     @PostMapping("/chat")//봇에게 메세지 보내기
-    public List<ChatLog> chat(@RequestBody ChatRequest chatRequest) {
+    public ChatLog chat(@RequestBody ChatRequest chatRequest) {
         return chatLogService.getResponse(chatRequest.getId(), chatRequest.getMessage());
     }
     /*

@@ -38,8 +38,34 @@ const ChatBot = ({ id, children }) => {
         setInput(e.target.value);
     };
 
+    const getLastMessageIndex = () => {//사용자 메세지 인덱스 구하기
+        if (messages.length === 0) {
+            return 1; // 배열이 비어있으면 null을 반환
+        }
+        return messages[messages.length - 1].index+1;
+    };
+
+    const scrollToBottom = () => {// 즉시 아래로 스크롤
+        setTimeout(() => {//0.1초 뒤 스크롤 아래로
+            if (messageEndRef.current) {
+                messageEndRef.current.scrollIntoView({ behavior: 'auto' });
+            }
+        }, 50);
+    };
+
     const handleSendMessage = () => {//사용자가 메세지를 입력했을 때
         if(input.trim()==='') return;//아무런 메세지를 넣지 않았을 때
+
+        const userMessage = {//배열에 먼저 사용자 메세지 추가
+            index: getLastMessageIndex(),
+            userId: id,
+            date: new Date().toISOString(),
+            text: input.trim(),
+            bot: false
+        };
+
+        setMessages(prevMessages => [...prevMessages, userMessage]);// 사용자 메시지를 먼저 추가합니다.
+        scrollToBottom();
 
         const chat = {
             id: id,
@@ -48,8 +74,9 @@ const ChatBot = ({ id, children }) => {
 
         axios.post('http://localhost:7890/chatbot/chat', chat)//채팅 입력 후 gpt 응답
             .then(response => {
-                const newMessages = response.data;
-                setMessages(prevMessages => [...prevMessages, ...newMessages]);
+                const newMessage = response.data;
+                setMessages(prevMessages => [...prevMessages, newMessage]);
+                scrollToBottom();
             })
             .catch(error => {
                 console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
