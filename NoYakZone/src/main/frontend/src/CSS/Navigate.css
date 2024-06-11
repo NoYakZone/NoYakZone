@@ -3,8 +3,11 @@
 .navbar {
   display: flex;
   align-items: center;
-  background-color: #cb3f3f;
+  justify-content: space-between;
+  background-color: #007BFF;
   padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .menuButton {
@@ -18,36 +21,52 @@
 
 .navbarLogo {
   height: 50px;
-  margin-right: 20px;
+  margin-right: 20px; /* 로고와 메뉴 항목 사이의 간격을 넓힘 */
 }
 
 .navbarLinks {
   display: flex;
+  align-items: center;
   flex-grow: 1;
+  justify-content: space-between; /* 메뉴 항목 사이에 균등한 간격을 둠 */
 }
 
 .navbarMenu {
-  margin: 0 10px;
+  margin: 0 30px; /* 각 메뉴 항목 사이에 넉넉한 간격을 둠 */
   text-decoration: none;
   color: white;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.navbarMenu:hover {
+  color: #ffdd57; /* 호버 시 밝은 노란색으로 변경 */
 }
 
 @media (max-width: 768px) {
   .navbarLinks {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: 60px; /* Adjust based on actual navbar height */
-      left: 0;
-      background-color: #cb3f3f;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px; /* 실제 navbar 높이에 따라 조정 */
+    left: 0;
+    background-color: #007BFF;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .navbarLinks.active {
-      display: flex;
+    display: flex;
   }
 
   .menuButton {
-      display: block;
+    display: block;
+  }
+
+  .navbarMenu {
+    margin: 15px 0; /* 모바일 뷰에서 각 메뉴 항목 사이에 더 넉넉한 간격을 둠 */
+    font-size: 20px;
+    text-align: center;
   }
 }
