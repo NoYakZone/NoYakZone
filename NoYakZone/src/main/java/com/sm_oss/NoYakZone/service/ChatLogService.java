@@ -25,11 +25,11 @@ public class ChatLogService {
     private ChatLogRepository chatLogRepository;
 
     @Value("${openai.api.key}")
-    private String apiKey;//안되요오오오오오오오
+    private String apiKey;
 
     private static List<String> conversationHistory = new ArrayList<>();
 
-    public String getResponse(String id, String message) {// api호출 시 첫 실행
+    public ChatLog getResponse(String id, String message) {// api호출 시 첫 실행
         List<ChatLog> recentLogs = findLatestChatLogs(id);//최신 대화내용 가져오기
         updateConversationHistory(recentLogs);//최신 대화내용 대화이력에 추가
         
@@ -37,8 +37,7 @@ public class ChatLogService {
         insertChatLog(id, message, false);//테이블에 insert
         String res = callChatGPT(message);//gpt 응답 받아오기
         updateConversationHistory("system", res); // 시스템 응답을 대화 이력에 추가
-        insertChatLog(id, res, true);//테이블에 insert
-        return res;
+        return insertChatLog(id, res, true);//테이블에 insert
     }
 
     private void updateConversationHistory(List<ChatLog> recentLogs) {
