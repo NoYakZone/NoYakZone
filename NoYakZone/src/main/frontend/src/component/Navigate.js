@@ -64,7 +64,10 @@ function Navigate() {
                     <Link className='navbarMenu' to={'/'}>Main</Link>
                     <Link className='navbarMenu' to={'/About'}>About</Link>
                     <Link className='navbarMenu' to={'/Community'}>Community</Link>
+<<<<<<< Updated upstream
                     <Link className='navbarMenu' to={'/Report'}>Report</Link> {/* Report 링크 추가 */}
+=======
+>>>>>>> Stashed changes
                     <Link className='navbarMenu' to={'/CheckList'}>CheckList</Link>
                     {isOfficial && <Link className='navbarMenu' to={'/Investigation'}>Investigation</Link>}
                 </div>
