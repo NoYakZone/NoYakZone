@@ -8,8 +8,8 @@ const Footer = () => {
                 <div className='footer-content'>
                     <h2 className='footer-title'>NoYakZone</h2>
                     <p className='footer-description'>
-                        NoYakZone은 마약 중독 예방과 상담을 위한 서비스를 제공합니다. 
-                        여러분의 건강한 삶을 위해 최선을 다하겠습니다.
+                        <p>NoYakZone은 마약 중독 예방과 상담을 위한 서비스를 제공합니다.</p>
+                        <p>여러분의 건강한 삶을 위해 최선을 다하겠습니다.</p>
                     </p>
                 </div>
                 <div className='footer-links'>
