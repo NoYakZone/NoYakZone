@@ -10,7 +10,11 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/userData/login", { id, password });
+      const response = await axios.post(
+        "http://localhost:7890/userData/login",
+        { id, password }
+      );
+      console.log(response);
       const { data } = response;
 
       if (response.status === 200) {
