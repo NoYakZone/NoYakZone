@@ -32,7 +32,7 @@ const ReportModal = ({ onClose, refreshReports }) => {
   return (
     <div className="modal-container">
       <div className="modal-content">
-        <h2>New Report</h2>
+        <h2>신고하기</h2>
         <form onSubmit={handleSubmit}>
           <label>
             <input

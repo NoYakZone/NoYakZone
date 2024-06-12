@@ -21,4 +21,5 @@ public class Report {
     private String link;
     private String picture;
     private boolean result;
+    private boolean checkDrug;
 }
