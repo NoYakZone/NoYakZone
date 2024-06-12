@@ -61,8 +61,14 @@ const ReportPage = () => {
 
   return (
     <div className="container">
-      <h1>신고 내역</h1>
-      <button onClick={openModal}>신고하기</button>
+      <div className="header">
+        <h1>신고 내역</h1>
+        <button onClick={openModal} className="report-button">
+          신고하기
+        </button>
+      </div>
+      <br />
+      <br />
       <ul className="reports-list">
         {reports
           .filter((report) => report.userId === username)
