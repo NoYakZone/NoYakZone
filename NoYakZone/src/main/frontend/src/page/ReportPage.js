@@ -1,4 +1,3 @@
-// ReportPage.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReportModal from "../modals/ReportModal";
@@ -34,24 +33,29 @@ const ReportPage = () => {
     setIsModalOpen(false);
   };
 
+  const username = localStorage.getItem("username");
+
   return (
     <div className="container">
-      <h2>신고 페이지</h2>
-      <button onClick={openModal}>글쓰기</button>
+      <h1>신고 내역</h1>
+      <button onClick={openModal}>신고하기</button>
 
       <h3>Reports</h3>
       <ul className="reports-list">
-        {reports.map((report) => (
-          <li key={report.index}>
-            <h4>{report.title}</h4>
-            <p>{report.text}</p>
-            <p>
-              {report.userId} - {new Date(report.date).toLocaleString()}
-            </p>
-            {report.link && <a href={report.link}>Link</a>}
-            {report.picture && <img src={report.picture} alt="Report" />}
-          </li>
-        ))}
+        {reports
+          .filter((report) => report.userId === username)
+          .map((report) => (
+            <li key={report.index}>
+              <h2>{report.title}</h2>
+              <p>{report.text}</p>
+              <p>{new Date(report.date).toLocaleString()}</p>
+              <p>{report.link && <a href={report.link}>{report.link}</a>}</p>
+              <p>
+                {report.picture && <img src={report.picture} alt="Report" />}
+              </p>
+              <p>{report.result.toLocaleString()}</p>
+            </li>
+          ))}
       </ul>
 
       {isModalOpen && (

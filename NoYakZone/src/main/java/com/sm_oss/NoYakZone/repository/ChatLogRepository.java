@@ -8,6 +8,6 @@ import com.sm_oss.NoYakZone.model.ChatLog;
 import java.util.List;
 
 @Repository
-public interface ChatLogRepository extends JpaRepository<ChatLog, Long> { // <엔티티 타입, ID 타입>
+public interface ChatLogRepository extends JpaRepository<ChatLog, Long> {
     List<ChatLog> findByUserId(String userId);
 }

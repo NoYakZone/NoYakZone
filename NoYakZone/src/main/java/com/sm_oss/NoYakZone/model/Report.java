@@ -20,4 +20,5 @@ public class Report {
     private String text;
     private String link;
     private String picture;
+    private boolean result;
 }
