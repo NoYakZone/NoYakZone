@@ -13,19 +13,21 @@ import poster4 from '../image/마약포스터4.png';
 import poster5 from '../image/마약포스터5.png';
 
 //마약 데이터
-import fentanyl from '../image/펜타닐.png'; 
+import fentanyl from '../image/펜타닐.png';
 import ketamine from '../image/케타민.png';
 import cocaine from '../image/코카인.png';
 import methylphenidate from '../image/페니드.png';
 import noImage from '../image/이미지 없음.png';
+import cannabis from '../image/대마초.png'
+import pethidine from '../image/페치딘.png'
 
 const exampleData = [
     { id: 1, name: '펜타닐(Fentanyl)', imageUrl: fentanyl, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/펜타닐(fentanyl).pdf' },
     { id: 2, name: '케타민(Ketamine)', imageUrl: ketamine, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/케타민(ketamine).pdf' },
     { id: 3, name: '코카인(Cocaine)', imageUrl: cocaine, link: 'https://www.msdmanuals.com/ko-kr/home/특별-주제/불법-약물-및-중독성-물질/코카인' },
     { id: 4, name: '메틸페니데이트(Methylphenidate)', imageUrl: methylphenidate, link: 'https://www.health.kr/Menu.PharmReview/_uploadfiles/메틸페니데이트.pdf' },
-    { id: 5, name: '디히드로코데인(Dihydrocodeine)', imageUrl: noImage, link: 'https://www.health.kr/Menu.PharmReview/View.asp?PharmReview_IDX=8677' },
-    { id: 6, name: '대마초(Cannabis)', imageUrl: noImage, link: 'https://www.health.kr/Menu.PharmReview/View.asp?PharmReview_IDX=8609' },
+    { id: 5, name: '페치딘(Pethidine)', imageUrl: pethidine, link: 'https://www.health.kr/searchDrug/result_drug.asp?drug_cd=A11ABBBBB0169' },
+    { id: 6, name: '대마초(Cannabis)', imageUrl: cannabis, link: 'https://www.health.kr/Menu.PharmReview/View.asp?PharmReview_IDX=8609' },
 ];
 
 const MainPage = () => {
@@ -60,8 +62,12 @@ const MainPage = () => {
 
                     <div className="slideContent">
                         <div className="slideText">
-                            <h3>Making Tomorrow Better</h3>
-                            <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
+                            <h2>Making Tomorrow Better</h2>
+                            <p>
+                                <p>저희 NoYakZone은 </p>
+                                <p>마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
+                               
+                            </p>
                         </div>
                         <Swiper 
                             navigation={true} 
@@ -69,6 +75,7 @@ const MainPage = () => {
                             modules={[Navigation, Pagination, Autoplay]} 
                             className="mySwiper"
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
+                            loop={true}
                         >
                             <SwiperSlide><img src={poster1} alt="Poster 1" className="poster-image" /></SwiperSlide>
                             <SwiperSlide><img src={poster2} alt="Poster 2" className="poster-image" /></SwiperSlide>
@@ -90,11 +97,12 @@ const MainPage = () => {
                         modules={[Navigation, Pagination, Autoplay]} 
                         className="mySwiper"
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        loop={true}
                     >
                         {exampleData.slice(0, 6).map((item) => (
                             <SwiperSlide key={item.id} onClick={() => handleSlideClick(item.link)}>
                                 <div>
-                                    <img src={item.imageUrl} alt={item.name} className="poster-image" />
+                                    <img src={item.imageUrl} alt={item.name} className="drug-image" />
                                     <div className="slideTitle">{item.name}</div>
                                 </div>
                             </SwiperSlide>
@@ -106,9 +114,9 @@ const MainPage = () => {
                     <h2>커뮤니티</h2>
                 </div>
 
-                <div className='ChatBot' onClick={goToChatBot}>
+                {/* <div className='ChatBot' onClick={goToChatBot}>
                     <p>상담 챗봇 페이지</p>
-                </div>
+                </div> */}
             </div>
         </div>
     );
