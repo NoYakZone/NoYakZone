@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
 import '../CSS/CheckList.css';
+import ChatBot from './ChatBot';
 
 Chart.register(...registerables);
 
@@ -154,6 +155,7 @@ const CheckList = () => {
                     <div className="clear"></div>
                 </div>
             )}
+            <ChatBot />
         </div>
     );
 };

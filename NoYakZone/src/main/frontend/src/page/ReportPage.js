@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReportModal from "../modals/ReportModal";
 import "../CSS/ReportPage.css";
+import ChatBot from './ChatBot';
 
 const ReportPage = () => {
   const [reports, setReports] = useState([]);
@@ -36,6 +37,7 @@ const ReportPage = () => {
   const username = localStorage.getItem("username");
 
   return (
+    <div>
     <div className="container">
       <h1>신고 내역</h1>
       <button onClick={openModal}>신고하기</button>
@@ -61,6 +63,8 @@ const ReportPage = () => {
       {isModalOpen && (
         <ReportModal onClose={closeModal} refreshReports={fetchReports} />
       )}
+    </div>
+      <ChatBot />
     </div>
   );
 };

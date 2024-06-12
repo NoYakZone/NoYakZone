@@ -38,6 +38,7 @@ function Navigate() {
         localStorage.removeItem('username');
         localStorage.removeItem('official');
         history.push('/'); // 로그아웃 후 메인 페이지로 이동
+        window.location.reload();//페이지 새로고침
     };
 
     const toggleMenu = () => {

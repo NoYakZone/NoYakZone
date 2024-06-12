@@ -9,6 +9,7 @@ import noImage from '../image/이미지 없음.png';
 import searchImg from '../image/검색.png';
 import KPIC from '../image/약학정보원.png';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ChatBot from './ChatBot';
 
 const getChosung = (text) => {
     const chosung = [
@@ -147,6 +148,7 @@ const About = () => {
                     </TransitionGroup>
                 </div>
             </div>
+            <ChatBot />
         </div>
     );
 };
