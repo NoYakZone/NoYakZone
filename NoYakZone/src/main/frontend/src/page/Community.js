@@ -104,7 +104,7 @@ const Community = () => {
           </div>
         </>
       )}
-      <ChatBot id={"qwer"}/>
+      <ChatBot/>
     </div>
   );
 };

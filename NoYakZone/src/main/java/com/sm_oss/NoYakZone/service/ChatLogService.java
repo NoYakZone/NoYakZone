@@ -7,10 +7,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import com.sm_oss.NoYakZone.model.ChatLog;
 import com.sm_oss.NoYakZone.repository.ChatLogRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +38,7 @@ public class ChatLogService {
         
         updateConversationHistory("user", message);
         insertChatLog(id, message, false);//테이블에 insert
-        String res = callChatGPT(message);//gpt 응답 받아오기
+        String res = callChatGPT();//gpt 응답 받아오기
         updateConversationHistory("system", res); // 시스템 응답을 대화 이력에 추가
         return insertChatLog(id, res, true);//테이블에 insert
     }
@@ -52,11 +55,10 @@ public class ChatLogService {
     private void updateConversationHistory(String role, String content) {// 리스트에 대화내용 추가
         // 대화 내용을 JSON 문자열로 변환
         String newEntry = "{\"role\": \"" + role + "\", \"content\": \"" + content.replace("\"", "\\\"") + "\"}";
-
         conversationHistory.add(newEntry);
     }
 
-    private String callChatGPT(String prompt) {// 실제 gpt api 사용
+    private String callChatGPT() {// 실제 gpt api 사용
         try {
             URL url = new URL("https://api.openai.com/v1/chat/completions");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -143,4 +145,22 @@ public class ChatLogService {
                 .collect(Collectors.toList());
     }
 
+    public String getChat(String recentLogs){//비로그인용
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Map<String, Object>> logs;
+        
+        try {
+            logs = objectMapper.readValue(recentLogs, new TypeReference<List<Map<String, Object>>>() {});
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse JSON", e);
+        }
+
+        conversationHistory.clear(); // 기존 대화 이력 초기화
+        for (Map<String, Object> log : logs) {
+            String role = (boolean) log.get("bot") ? "system" : "user";
+            String content = (String) log.get("text");
+            updateConversationHistory(role, content);
+        }
+        return callChatGPT();
+    }
 }

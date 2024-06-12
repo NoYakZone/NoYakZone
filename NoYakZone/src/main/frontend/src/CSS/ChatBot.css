@@ -2,13 +2,11 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #3300cc;
     border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 16px;
+    border-radius: "50%";
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex; /* flexbox 레이아웃을 사용합니다 */
@@ -17,7 +15,7 @@
   }
   
   .chatbot-button:hover {
-    background-color: #0056b3;
+    background-color: #3300cc;
   }
 
   .chatbot-window {

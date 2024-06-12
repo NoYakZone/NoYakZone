@@ -8,7 +8,6 @@ import methylphenidate from '../image/페니드.png';
 import noImage from '../image/이미지 없음.png';
 import searchImg from '../image/검색.png';
 import KPIC from '../image/약학정보원.png';
-import ChatBot from './ChatBot';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const getChosung = (text) => {
@@ -145,7 +144,6 @@ const About = () => {
                     </TransitionGroup>
                 </div>
             </div>
-            <ChatBot />
         </div>
     );
 };
