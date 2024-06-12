@@ -3,8 +3,9 @@
     bottom: 20px;
     right: 20px;
     background-color: #3300cc;
+    color: white;
     border: none;
-    border-radius: "50%";
+    border-radius: 50%;
     width: 80px;
     height: 80px;
     cursor: pointer;
@@ -12,10 +13,7 @@
     display: flex; /* flexbox 레이아웃을 사용합니다 */
     justify-content: center; /* 가로축에서 중앙 정렬합니다 */
     align-items: center; /* 세로축에서 중앙 정렬합니다 */
-  }
-  
-  .chatbot-button:hover {
-    background-color: #3300cc;
+    z-index: 1000;/* 가장 위로 올라오게 하기 */
   }
 
   .chatbot-window {
@@ -31,16 +29,9 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    z-index: 1000;/* 가장 위로 올라오게 하기 */
 }
 
-/* .chatbot-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-} */
   .chatbot-header {
   display: flex;
   justify-content: space-between;

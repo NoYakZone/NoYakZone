@@ -19,6 +19,7 @@ const Login = ({ onLogin }) => {
         localStorage.setItem("username", id);
         localStorage.setItem("official", official.toString());
         onLogin(id);
+        window.location.reload();//페이지 새로고침
       } else {
         setErrorMessage("로그인 실패: " + data);
       }

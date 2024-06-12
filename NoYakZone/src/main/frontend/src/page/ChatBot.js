@@ -14,20 +14,24 @@ const ChatBot = ({ children }) => {
     const [loginUser, setLoginUser] = useState(false);//로그인한 사용자인지 확인
 
     useEffect(() => {
-        if (messages.length === 0) {//기본 멘트
-            const message = {
-                index: 0,
-                userId: "",
-                date: new Date().toISOString(),
-                text: "마약과 관련된 모든 상담을 할 수 있습니다. 편하게 말걸어주세요~",
-                bot: true
-            };
-            setMessages(prevMessages => [...prevMessages, message]);
-        }
+        const message = {
+            index: 0,
+            userId: "",
+            date: new Date().toISOString(),
+            text: "마약과 관련된 모든 상담을 할 수 있습니다. 편하게 말걸어주세요~",
+            bot: true
+        };
+        setMessages(prevMessages => [...prevMessages, message]);
 
         if(localStorage.getItem("username")===null){//비로그인
             setLoginUser(false);
-        } 
+            if(localStorage.getItem("chatcount")===null) localStorage.getItem("chatcount", 0);//무료 횟수
+
+            const storedItems = localStorage.getItem('freechat');//무료채팅기록 불러오기
+            if (storedItems) {
+                setMessages(JSON.parse(storedItems));
+            }
+        }
         else {//로그인
             setLoginUser(true);
             chatHistory();
@@ -84,7 +88,7 @@ const ChatBot = ({ children }) => {
         setMessages(prevMessages => [...prevMessages, userMessage]);// 사용자 메시지를 먼저 추가합니다.
         scrollToBottom();
 
-        if(loginUser){//로그인한 유저
+        if(loginUser){/*****************************************************로그인했을 때***************************************************************/
             const chat = {
                 id: localStorage.getItem("username"),
                 message: input.trim()
@@ -100,27 +104,43 @@ const ChatBot = ({ children }) => {
                     console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
                 });
         }
-        else{//비로그인
-            const chat = [...messages, userMessage].map(msg => ({
-                text: msg.text,
-                bot: msg.bot
-            }));
-
-            axios.post('http://localhost:7890/chatbot/getchat', chat)//채팅 입력 후 gpt 응답
-                .then(response => {
-                    const botMessage = {//배열에 먼저 봇 메세지 추가
-                        index: getLastMessageIndex(),
-                        userId: "",
-                        date: new Date().toISOString(),
-                        text: response.data,
-                        bot: true
-                    };
-                    setMessages(prevMessages => [...prevMessages, botMessage]);
-                    scrollToBottom();
-                })
-                .catch(error => {
-                    console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
-                });
+        else{/*****************************************************비로그인***************************************************************/
+            const currentCount = parseInt(localStorage.getItem("chatcount"), 10);
+            if(currentCount>4){//무료 챗봇 질문 횟수 : 5번
+                const stopMessage = {//차단 메세지
+                    index: getLastMessageIndex(),
+                    userId: "",
+                    date: new Date().toISOString(),
+                    text: "추가로 이용하시려면 로그인을 해주세요^^",
+                    bot: true
+                };
+                setMessages(prevMessages => [...prevMessages, stopMessage]);
+                scrollToBottom();
+            }
+            else{//무료 횟수가 소진되기 전 gpt 응답 가능
+                const chat = [...messages, userMessage].map(msg => ({//지금까지 대화내용 + 자신의 내용을 임시 배열로
+                    text: msg.text,
+                    bot: msg.bot
+                }));
+    
+                axios.post('http://localhost:7890/chatbot/getchat', chat)//채팅 입력 후 gpt 응답
+                    .then(response => {
+                        const botMessage = {//배열에 먼저 봇 메세지 추가
+                            index: getLastMessageIndex(),
+                            userId: "",
+                            date: new Date().toISOString(),
+                            text: response.data,
+                            bot: true
+                        };
+                        setMessages(prevMessages => [...prevMessages, botMessage]);
+                        scrollToBottom();
+                    })
+                    .catch(error => {
+                        console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
+                    });
+            }
+            localStorage.setItem('freechat', JSON.stringify(messages));//무료채팅기록 저장
+            localStorage.setItem("chatcount", currentCount+1);//사용횟수 +1
         }
 
         setInput('');
