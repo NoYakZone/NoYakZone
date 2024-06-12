@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../CSS/Community.css";
 import ChatBot from './ChatBot';
+import "../CSS/Community.css";
 
 const Community = () => {
   const [slangData, setSlangData] = useState([]);
@@ -61,6 +61,7 @@ const Community = () => {
   };
 
   return (
+    <div>
     <div className="container">
       <h2>마약 은어 소개 페이지</h2>
       <div className="search-bar">
@@ -104,7 +105,8 @@ const Community = () => {
           </div>
         </>
       )}
-      <ChatBot/>
+    </div>
+    <ChatBot />
     </div>
   );
 };

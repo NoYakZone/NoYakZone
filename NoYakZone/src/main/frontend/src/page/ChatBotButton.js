@@ -5,7 +5,7 @@ import '../CSS/ChatBot.css'
 const ChatBotButton = ({ onClick }) => {
     return (
         <button className="chatbot-button" onClick={onClick}>
-          <RiRobot2Line size="60" style={{backgroundColor: "#3300cc"}}/>
+          <RiRobot2Line size="45"/>
         </button>
       );
 };

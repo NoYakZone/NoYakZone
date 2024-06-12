@@ -5,6 +5,7 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useHistory } from 'react-router-dom';
 import '../CSS/MainPage.css';
+import ChatBot from './ChatBot';
 
 import poster1 from '../image/마약포스터1.png';
 import poster2 from '../image/마약포스터2.png';
@@ -118,6 +119,7 @@ const MainPage = () => {
                     <p>상담 챗봇 페이지</p>
                 </div> */}
             </div>
+            <ChatBot />
         </div>
     );
 };
