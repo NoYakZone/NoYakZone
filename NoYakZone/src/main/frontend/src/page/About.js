@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Fade } from "react-awesome-reveal";
 import '../CSS/About.css';
@@ -11,15 +11,13 @@ import methylphenidate from '../image/페니드.png';
 import noImage from '../image/이미지 없음.png';
 import searchImg from '../image/검색.png';
 import KPIC from '../image/약학정보원.png';
-import cannabis from '../image/대마초.png'
-import dextromethorphan from '../image/덱스트로메토르판.png'
-import codeine from '../image/코데인.png'
-import garsinia from '../image/가르시니아.png'
-import betamethasone from '../image/베타메타손.png'
-import ativan from '../image/아티반.png'
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import cannabis from '../image/대마초.png';
+import dextromethorphan from '../image/덱스트로메토르판.png';
+import codeine from '../image/코데인.png';
+import garsinia from '../image/가르시니아.png';
+import betamethasone from '../image/베타메타손.png';
+import ativan from '../image/아티반.png';
 import ChatBot from './ChatBot';
-
 
 const getChosung = (text) => {
     const chosung = [
@@ -69,8 +67,12 @@ const exampleData = [
 
 const About = () => {
     const [keyword, setKeyword] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(exampleData);
     const [initial, setInitial] = useState('');
+
+    useEffect(() => {
+        setResults(exampleData);
+    }, []);
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -98,15 +100,16 @@ const About = () => {
                     <p>우리는 다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.</p>
                     <ul>
                         <li>
-                            <strong>챗봇 상담 서비스</strong>: 일반 사람들은 우리의 챗봇을 통해 익명으로 상담을 받을 수 있습니다.
-                            <p>이 서비스는 마약 사용 문제를 겪고 있거나, 이를 예방하고 싶은 사람들에게 유용한 정보를 제공하고, 필요한 경우 전문 상담사와의 연결을 돕습니다.</p>
+                            <strong>챗봇 상담 서비스</strong> 일반 사람들은 우리의 챗봇을 통해 익명으로 상담을 받을 수 있습니다.
+                            <p>이 서비스는 마약 사용 문제를 겪고 있는 사람에겐 상담을, 이를 예방하고 싶은 사람들에게 유용한 정보를 제공하는 도움을 주려고 합니다</p>
+                            
                         </li>
                         <li>
-                            <strong>마약 은어 정보 제공</strong>: 일반인들은 마약과 관련된 다양한 은어와 용어에 대한 정보를 제공받을 수 있습니다.
+                            <strong>마약 은어 정보 제공</strong> 일반인들은 마약과 관련된 다양한 은어와 용어에 대한 정보를 제공받을 수 있습니다.
                             <p>이를 통해 마약 문제를 보다 쉽게 인식하고 예방할 수 있도록 돕습니다.</p>
                         </li>
                         <li>
-                            <strong>데이터 제공</strong>: 경찰에게는 마약과 관련된 데이터를 제공합니다.
+                            <strong>데이터 제공</strong> 경찰에게는 마약과 관련된 데이터를 제공합니다.
                             <p>이를 통해 마약 범죄를 보다 효과적으로 추적하고 대응할 수 있도록 지원합니다.</p>
                         </li>
                     </ul>

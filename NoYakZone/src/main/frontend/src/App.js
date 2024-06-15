@@ -21,7 +21,7 @@ import PrivacyPolicy from "./page/PrivacyPolicy";
 
 function App() {
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ width: '100%' }}>
       <BrowserRouter>
         <Navigate />
         <div className="content-wrap">
