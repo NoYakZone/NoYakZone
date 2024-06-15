@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Fade } from "react-awesome-reveal";
 import '../CSS/About.css';
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/board")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BoardController {
 
     @Autowired
