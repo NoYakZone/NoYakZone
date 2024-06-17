@@ -1,4 +1,5 @@
-/* General container styling */
+/* Community.css */
+
 .container {
   width: 80%;
   margin: 0 auto;
@@ -8,7 +9,6 @@
   border-radius: 10px;
 }
 
-/* Search bar styling */
 .search-bar {
   margin-bottom: 20px;
   display: flex;
@@ -24,7 +24,29 @@
   font-size: 16px;
 }
 
-/* Slang list styling */
+.initial_search {
+  margin-bottom: 20px;
+}
+
+.initial_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.initial_buttons button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.initial_buttons button:hover {
+  background: #e0e0e0;
+}
+
 .slang-list {
   display: flex;
   flex-wrap: wrap;
@@ -58,7 +80,14 @@
   font-size: 1.2em;
 }
 
-/* Pagination styling */
+.highlighted-description {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -86,7 +115,6 @@
   background-color: #0056b3;
 }
 
-/* Modal styling */
 .modal {
   position: fixed;
   top: 50%;

@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
         setErrorMessage("로그인 실패: " + data);
       }
     } catch (error) {
-      setErrorMessage("로그인 실패: 서버 오류");
+      setErrorMessage("아이디, 비밀번호를 다시 한번 확인해주세요");
     }
   };
 
