@@ -17,6 +17,7 @@ import codeine from '../image/코데인.png';
 import garsinia from '../image/가르시니아.png';
 import betamethasone from '../image/베타메타손.png';
 import ativan from '../image/아티반.png';
+
 import ChatBot from './ChatBot';
 
 const getChosung = (text) => {
