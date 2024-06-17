@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Modal from "../modals/InvestigationDetailModal";
+import Prompt from './Prompt';
+
 import "../CSS/Investigation.css";
 
 function Investigation() {
@@ -102,6 +104,8 @@ function Investigation() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
+
+    <div>
     <div className="investigation-container">
       <div className="header">
         <h1>　</h1>
@@ -116,12 +120,21 @@ function Investigation() {
         </div>
       </div>
       <div className="content">
+
+        <ul>
+          {searchResults.map((item) => (
+            <li key={item.id} onClick={() => openModal(item)}>
+              {item.name}
+            </li>
+          ))}
+        </ul>
         <div className="posts-container">
           <h2>Posts</h2>
           <ul>
             {currentPosts.map((post) => (
               <li key={post.index}>
                 onClick={() => openModal(post)}
+
                 <div>
                   <strong>
                     {post.text.length > 100
@@ -130,7 +143,20 @@ function Investigation() {
                   </strong>
                 </div>
                 <div>{post.place}</div>
+
                 <div>{new Date(post.date).toLocaleDateString()}</div>
+                <div>{new Date(post.date).toLocaleString()}</div>
+                {post.url && (
+                  <div>
+                    <a
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link
+                    </a>
+                  </div>
+                )}
                 {post.picture && (
                   <div>
                     <img src={post.picture} alt={post.text} />
@@ -148,6 +174,7 @@ function Investigation() {
         </div>
       </div>
       <Modal isOpen={modalOpen} onClose={closeModal}>
+
         {modalContent && (
           <div>
             <h2>{modalContent.name}</h2>
@@ -155,6 +182,9 @@ function Investigation() {
           </div>
         )}
       </Modal>
+    </div>
+
+    <Prompt />
     </div>
   );
 }
@@ -215,5 +245,5 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     </nav>
   );
 };
-
 export default Investigation;
+

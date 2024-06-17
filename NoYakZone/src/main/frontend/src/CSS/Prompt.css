@@ -1,0 +1,222 @@
+.prompt-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(to right, #3300cc, #00DDDD); /* 그라데이션 적용 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* flexbox 레이아웃을 사용합니다 */
+    justify-content: center; /* 가로축에서 중앙 정렬합니다 */
+    align-items: center; /* 세로축에서 중앙 정렬합니다 */
+    z-index: 1000;/* 가장 위로 올라오게 하기 */
+  }
+
+  .prompt-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 900;/* 가장 위로 올라오게 하기 */
+}
+
+  .prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  background: linear-gradient(to right, #37159e, #00DDDD); /* 그라데이션 적용 */
+}
+
+/*******************************메세지 부분*******************************/
+
+.prompt-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.prompt-message {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+}
+
+.bot-message {
+    justify-content: start;
+}
+
+.user-message {
+    justify-content: end;
+}
+
+.message-box {
+    display: inline-block; /* 텍스트 길이에 따라 크기 조정 */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    max-width: 70%; /* 메시지 박스가 부모 요소의 최대 너비를 넘지 않도록 설정 */
+    word-wrap: break-word; /* 너무 긴 단어가 있을 경우 줄바꿈 처리 */
+}
+
+.bot-message .message-box {
+    background-color: #37159e; /* 파란색 배경 */
+    color: #fff; /* 흰색 글자 */
+}
+
+/*******************************메세지 부분*******************************/
+
+.prompt-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+.prompt-input input {
+    flex: 1;
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    border-radius: 0 0 0 8px;
+    outline: none;
+}
+
+.prompt-input button {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 13px;
+    padding-right: 13px;
+    background-color: #00DDDD;
+    color: white;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 8px 0;
+}
+
+.prompt-input button:hover {
+    background-color: #0056b3;
+}
+
+.prompt-title {
+    flex-grow: 1; /* 남은 공간을 차지하여 가운데 정렬 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.close-button {
+  cursor: pointer;
+  background-color: transparent;
+  margin-left: auto; /* 버튼을 오른쪽 끝으로 밀어냄 */
+  color: white;
+  margin-top: -7px;
+  border: none;
+}
+
+@keyframes slideInFromLeft {/*메세지가 나올 때 애니메이션*/
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.prompt-window-visible {/*메세지가 나올 때 애니메이션*/
+    animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+@keyframes slideOutToLeft {/*메세지가 사라질 때 애니메이션*/
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.prompt-window-hidden {/*메세지가 사라질 때 애니메이션*/
+    animation: slideOutToLeft 0.5s ease-out forwards;
+}
+
+/*******************************로딩화면*******************************/
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background-color: #000;
+    border-radius: 50%;
+    animation: loading 1s infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/*******************************퀵버튼*******************************/
+
+.prompt-quick-buttons {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    width: 480px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1000; /* 다른 요소들 위에 위치하도록 합니다. */
+}
+
+.prompt-quick-buttons button {
+    background-color: #0056b3;
+    margin: 10px;
+}
+
+.prompt-quick-buttons button.selected {
+    background-color: #e0e0e0; /* 선택된 버튼 배경 색상 */
+    border-color: #000; /* 선택된 버튼 테두리 색상 */
+}
