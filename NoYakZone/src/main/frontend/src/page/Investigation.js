@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Modal from "../modals/InvestigationDetailModal";
 import Prompt from './Prompt';
+
 import "../CSS/Investigation.css";
 
 function Investigation() {
@@ -50,7 +51,6 @@ function Investigation() {
           return response.json();
         })
         .then((data) => {
-          // Sort posts by date in descending order
           const sortedPosts = data.sort(
             (a, b) => new Date(b.date) - new Date(a.date)
           );
@@ -67,25 +67,20 @@ function Investigation() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: searchTerm }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        alert("크롤링 시작");
-      })
-      .catch((error) => {
-        console.error("Error starting crawling:", error);
-        alert("크롤링 실패");
-      });
+    });
+    alert("크롤링 시작");
   };
 
   const openModal = (item) => {
     setModalContent(item);
+    console.log("모달이 켜진다");
     setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    console.log("모달이 꺼진다");
+    setModalContent(null);
   };
 
   if (!isOfficial) {
@@ -109,6 +104,7 @@ function Investigation() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
+
     <div>
     <div className="investigation-container">
       <div className="header">
@@ -124,6 +120,7 @@ function Investigation() {
         </div>
       </div>
       <div className="content">
+
         <ul>
           {searchResults.map((item) => (
             <li key={item.id} onClick={() => openModal(item)}>
@@ -136,6 +133,8 @@ function Investigation() {
           <ul>
             {currentPosts.map((post) => (
               <li key={post.index}>
+                onClick={() => openModal(post)}
+
                 <div>
                   <strong>
                     {post.text.length > 100
@@ -144,6 +143,8 @@ function Investigation() {
                   </strong>
                 </div>
                 <div>{post.place}</div>
+
+                <div>{new Date(post.date).toLocaleDateString()}</div>
                 <div>{new Date(post.date).toLocaleString()}</div>
                 {post.url && (
                   <div>
@@ -172,7 +173,8 @@ function Investigation() {
           />
         </div>
       </div>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+      <Modal isOpen={modalOpen} onClose={closeModal}>
+
         {modalContent && (
           <div>
             <h2>{modalContent.name}</h2>
@@ -181,6 +183,7 @@ function Investigation() {
         )}
       </Modal>
     </div>
+
     <Prompt />
     </div>
   );
@@ -242,5 +245,5 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     </nav>
   );
 };
-
 export default Investigation;
+
