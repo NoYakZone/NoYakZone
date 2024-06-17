@@ -2,7 +2,7 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #3300cc;
+    background: linear-gradient(to right, #3300cc, #00DDDD); /* 그라데이션 적용 */
     color: white;
     border: none;
     border-radius: 50%;
@@ -37,8 +37,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 3px;
-  background-color: #f1f1f1;
-  border-bottom: 1px solid #ccc;
+  background: linear-gradient(to right, #37159e, #00DDDD); /* 그라데이션 적용 */
 }
 
 /*******************************메세지 부분*******************************/
@@ -48,10 +47,6 @@
     padding: 10px;
     overflow-y: auto;
 }
-
-/* .chatbot-message {
-    margin-bottom: 10px;
-} */
 
 .chatbot-message {
     display: flex;
@@ -79,7 +74,7 @@
 }
 
 .bot-message .message-box {
-    background-color: #007bff; /* 파란색 배경 */
+    background-color: #37159e; /* 파란색 배경 */
     color: #fff; /* 흰색 글자 */
 }
 
@@ -104,7 +99,7 @@
     padding-bottom: 6px;
     padding-left: 13px;
     padding-right: 13px;
-    background-color: #007bff;
+    background-color: #00DDDD;
     color: white;
     border: none;
     cursor: pointer;
@@ -117,12 +112,20 @@
     background-color: #0056b3;
 }
 
+.chatbot-title {
+    flex-grow: 1; /* 남은 공간을 차지하여 가운데 정렬 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+}
+
 .close-button {
   cursor: pointer;
   background-color: transparent;
-  padding-top: 3px;
-  padding-right: 5px;
-  padding-left: 5px;
+  margin-left: auto; /* 버튼을 오른쪽 끝으로 밀어냄 */
+  color: white;
+  margin-top: -7px;
   border: none;
 }
 
@@ -150,4 +153,44 @@
 
 .chatbot-window-hidden {/*메세지가 사라질 때 애니메이션*/
     animation: slideOutToLeft 0.5s ease-out forwards;
+}
+
+/*******************************로딩화면*******************************/
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background-color: #000;
+    border-radius: 50%;
+    animation: loading 1s infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

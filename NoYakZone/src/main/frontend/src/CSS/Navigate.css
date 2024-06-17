@@ -1,3 +1,11 @@
+body {
+  min-width: 1470px; /* 전체 페이지가 1470px 이하로 줄어들지 않도록 설정 */
+}
+
+.navbarContainer {
+  width: 100%;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -6,42 +14,85 @@
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.menuButton {
-  display: none; /* 기본적으로는 버튼을 숨김 */
-  font-size: 30px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-.navbarLogo {
-  height: 50px;
-  margin-right: 20px; /* 로고와 메뉴 항목 사이의 간격을 넓힘 */
+  width: 100%;
+  position: relative; /* 메뉴가 열릴 때 위치를 기준으로 삼음 */
+  z-index: 1000; /* 메뉴가 다른 요소 위에 오도록 함 */
 }
 
 .navbarLinks {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  justify-content: space-between; /* 메뉴 항목 사이에 균등한 간격을 둠 */
+  gap: 30px; /* 메뉴 항목 사이의 간격을 조정 */
 }
 
 .navbarMenu {
-  margin: 0 30px; /* 각 메뉴 항목 사이에 넉넉한 간격을 둠 */
   text-decoration: none;
   color: white;
   font-size: 18px;
   transition: color 0.3s;
+  padding: 10px; /* 각 메뉴 항목의 내부 패딩 추가 */
 }
 
 .navbarMenu:hover {
   color: #ffdd57; /* 호버 시 밝은 노란색으로 변경 */
 }
 
-@media (max-width: 768px) {
+.navbarLogo {
+  height: 50px;
+  margin: 0 20px 0 5%; /* 로고의 왼쪽과 오른쪽에 여백 추가 */
+}
+
+.menuButton {
+  font-size: 30px; /* 햄버거 버튼 크기 조정 */
+  cursor: pointer;
+  color: white;
+  display: none; /* 기본적으로 숨김, 모바일에서만 보이도록 설정 */
+}
+
+.loginbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 5%; /* loginbar 오른쪽에 여백 추가 */
+  flex-wrap: nowrap; /* 항목들이 한 줄에 유지되도록 설정 */
+}
+
+.loginInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  color: white;
+}
+
+.logoutButton {
+  background-color: white;
+  color: #007BFF;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #ffdd57;
+}
+
+.join, .findPasswordLink {
+  margin-left: 15px;
+}
+
+@media (max-width: 1024px) {
+  .navbarLinks {
+    justify-content: flex-start;
+    gap: 20px; /* 중간 크기 화면에서는 간격을 줄임 */
+  }
+
+  .menuButton {
+    display: block; /* 모바일에서 햄버거 버튼 보이도록 설정 */
+  }
+
   .navbarLinks {
     display: none;
     flex-direction: column;
@@ -52,19 +103,30 @@
     background-color: #007BFF;
     padding: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* 메뉴가 다른 요소 위에 오도록 함 */
   }
 
   .navbarLinks.active {
     display: flex;
   }
 
-  .menuButton {
-    display: block;
-  }
-
   .navbarMenu {
-    margin: 15px 0; /* 모바일 뷰에서 각 메뉴 항목 사이에 더 넉넉한 간격을 둠 */
+    margin: 15px 0;
     font-size: 20px;
     text-align: center;
+    width: 100%; /* 모바일에서 메뉴 항목이 가로로 꽉 차도록 */
+  }
+
+  .loginbar {
+    justify-content: flex-end;
+    flex-wrap: nowrap; /* loginbar를 항상 가로로 유지 */
+    width: 100%;
+    margin-right: 0; /* 모바일 뷰에서도 오른쪽 여백 제거 */
+  }
+
+  .loginInfo,
+  .join,
+  .findPasswordLink {
+    margin: 0 5px; /* 모바일 뷰에서 각 항목 사이에 여백 추가 */
   }
 }

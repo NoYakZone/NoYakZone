@@ -54,19 +54,18 @@ const MainPage = () => {
         <div className='MainContainer'>
             <div className='Content'>
                 <div className='ServiceInfo'>
-                    <h2>서비스 소개</h2>
-                    <p className='serviceGoal' onClick={goToAboutPage}>
+                    <h1 className='Maintitle'>서비스 소개</h1>
+                    <h4 className='serviceGoal' onClick={goToAboutPage}>
                         우리의 사명은 마약 사용을 줄이고, 이를 통해 사회의 안전과 건강을 증진하는 것입니다.
-                        <p>다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.
-                        </p>
-                    </p>
+                        <h4>다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.
+                        </h4>
+                    </h4>
 
                     <div className="slideContent">
                         <div className="slideText">
-                            <h2>Making Tomorrow Better</h2>
+                            <h2 className='slogan'>Making Tomorrow Better</h2>
                             <p>
-                                <p>저희 NoYakZone은 </p>
-                                <p>마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
+                                <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
                                
                             </p>
                         </div>
@@ -76,6 +75,7 @@ const MainPage = () => {
                             modules={[Navigation, Pagination, Autoplay]} 
                             className="mySwiper"
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
+                            speed={3000}
                             loop={true}
                         >
                             <SwiperSlide><img src={poster1} alt="Poster 1" className="poster-image" /></SwiperSlide>
@@ -97,7 +97,8 @@ const MainPage = () => {
                         pagination={{ clickable: true }}
                         modules={[Navigation, Pagination, Autoplay]} 
                         className="mySwiper"
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        autoplay={{ delay: 4000, disableOnInteraction: false }}
+                        speed={4000}
                         loop={true}
                     >
                         {exampleData.slice(0, 6).map((item) => (

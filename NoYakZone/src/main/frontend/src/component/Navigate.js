@@ -1,5 +1,6 @@
 import { Link, useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { FaBars } from 'react-icons/fa';  // react-icons에서 FaBars 아이콘을 가져옵니다.
 import '../CSS/Navigate.css';
 import Logo from '../image/Logo.png';
 import Login from "./Login";
@@ -9,6 +10,7 @@ function Navigate() {
     const [username, setUsername] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOfficial, setIsOfficial] = useState(false);
+    const [visibleLinks, setVisibleLinks] = useState(5); // 처음에는 모든 링크가 보이도록 설정
 
     const history = useHistory();
 
@@ -22,6 +24,23 @@ function Navigate() {
             setUsername(storedUsername);
             setIsOfficial(officialStatus === 'true');
         }
+
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setVisibleLinks(2); // 작은 화면에서는 두 개의 링크만 보이도록 설정
+            } else if (window.innerWidth <= 1024) {
+                setVisibleLinks(3); // 중간 크기 화면에서는 세 개의 링크만 보이도록 설정
+            } else {
+                setVisibleLinks(5); // 큰 화면에서는 모든 링크가 보이도록 설정
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // 초기 로드 시에도 실행
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const handleLogin = (username) => {
@@ -38,7 +57,7 @@ function Navigate() {
         localStorage.removeItem('username');
         localStorage.removeItem('official');
         history.push('/'); // 로그아웃 후 메인 페이지로 이동
-        window.location.reload();//페이지 새로고침
+        window.location.reload(); // 페이지 새로고침
     };
 
     const toggleMenu = () => {
@@ -47,43 +66,43 @@ function Navigate() {
 
     const gotoMain = () => {
         history.push('/');
-    }
+    };
     const goToFindPassword = () => {
         history.push('/findPassword');
     };
-
     const goToFindId = () => {
         history.push('/findId');
     };
 
     return (
-        <div>
+        <div className='navbarContainer'>
             <div className='navbar'>
-                <button className='menuButton' onClick={toggleMenu}>☰</button>
-                <img src={Logo} alt='Logo' className='navbarLogo' onClick={gotoMain}/>
+                <FaBars className='menuButton' onClick={toggleMenu} />
+                <img src={Logo} alt='Logo' className='navbarLogo' onClick={gotoMain} />
                 <div className={isMenuOpen ? 'navbarLinks active' : 'navbarLinks'}>
-                    <Link className='navbarMenu' to={'/'}>Main</Link>
-                    <Link className='navbarMenu' to={'/About'}>About</Link>
-                    <Link className='navbarMenu' to={'/Community'}>Community</Link>
-                    <Link className='navbarMenu' to={'/Report'}>Report</Link> {/* Report 링크 추가 */}
-                    <Link className='navbarMenu' to={'/CheckList'}>CheckList</Link>
+                    {visibleLinks >= 1 && <Link className='navbarMenu' to={'/'}>Main</Link>}
+                    {visibleLinks >= 2 && <Link className='navbarMenu' to={'/About'}>About</Link>}
+                    {visibleLinks >= 3 && <Link className='navbarMenu' to={'/Community'}>Community</Link>}
+                    {visibleLinks >= 4 && <Link className='navbarMenu' to={'/Report'}>Report</Link>}
+                    {visibleLinks >= 5 && <Link className='navbarMenu' to={'/CheckList'}>CheckList</Link>}
                     {isOfficial && <Link className='navbarMenu' to={'/Investigation'}>Investigation</Link>}
                 </div>
 
-                {/* 로그인 */}
-                {isLoggedIn ? (
-                    <div>
-                        <span>{username}</span>
-                        <button onClick={handleLogout}>Logout</button>
+                <div className='loginbar'>
+                    {isLoggedIn ? (
+                        <div className='loginInfo'>
+                            <span className='username'>{username}</span>
+                            <button className='logoutButton' onClick={handleLogout}>Logout</button>
+                        </div>
+                    ) : (
+                        <Login onLogin={handleLogin} />
+                    )}
+                    <div className='join'>
+                        <Link className='navbarMenu' to={'/MemberChoice'}>회원가입</Link>
                     </div>
-                ) : (
-                    <Login onLogin={handleLogin} />
-                )}
-                <div className='join'>
-                    <Link className='navbarMenu' to={'/MemberChoice'}>회원가입</Link>
-                </div>
-                <div className='FindPasswordLink' onClick={goToFindPassword}>
-                    <p>비밀번호 찾기</p>
+                    <div className='findPasswordLink' onClick={goToFindPassword}>
+                        <Link className='navbarMenu' to={'/findPassword'}>아이디/비밀번호 찾기</Link>
+                    </div>
                 </div>
             </div>
         </div>
