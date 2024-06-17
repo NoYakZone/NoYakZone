@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/prompt")
 public class PromptController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class PromptController {
     @Autowired
     private PatterRepository patterRepository;
 
-    @GetMapping("/searchPatterByWord")
+    @GetMapping("/searchPatterByWord")//은어 검색
     public ResponseEntity<List<Patter>> searchPatterByWord(@RequestParam("word") String word) {
         List<Patter> patterns = patterRepository.findByWordContaining(word);
         return ResponseEntity.ok(patterns);
@@ -34,13 +34,13 @@ public class PromptController {
         return ResponseEntity.ok(boards);
     }
 
-    @GetMapping("/searchBoardsByUserId")
+    @GetMapping("/searchBoardsByUserId")//딜러 검색
     public ResponseEntity<List<Board>> searchBoardsByUserId(@RequestParam("userId") String userId) {
         List<Board> boards = boardRepository.findById(userId);
         return ResponseEntity.ok(boards);
     }
 
-    @GetMapping("/searchBoardsByText")
+    @GetMapping("/searchBoardsByText")//게시글 검색
     public ResponseEntity<List<Board>> searchBoardsByText(@RequestParam("text") String text) {
         List<Board> boards = boardRepository.findByTextContaining(text);
         return ResponseEntity.ok(boards);
