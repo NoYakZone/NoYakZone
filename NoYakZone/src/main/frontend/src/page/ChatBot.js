@@ -9,6 +9,7 @@ const ChatBot = ({ children }) => {
     const [isChatbotOpen, setIsChatbotOpen] = useState(false);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
+    const [loading, setLoading] = useState(false);
     const messageEndRef = useRef(null);//메세지창 맨 아래로 스크롤 내리기
     const [isChatbotClosing, setIsChatbotClosing] = useState(false);//챗봇 버튼 닫을 때
     const [loginUser, setLoginUser] = useState(false);//로그인한 사용자인지 확인
@@ -75,7 +76,7 @@ const ChatBot = ({ children }) => {
 
     const handleSendMessage = () => {//사용자가 메세지를 입력했을 때
         if(input.trim()==='') return;//아무런 메세지를 넣지 않았을 때
-
+        setLoading(true);//로딩화면
 
         const userMessage = {//배열에 먼저 사용자 메세지 추가
             index: getLastMessageIndex(),
@@ -99,6 +100,7 @@ const ChatBot = ({ children }) => {
                     const newMessage = response.data;
                     setMessages(prevMessages => [...prevMessages, newMessage]);
                     scrollToBottom();
+                    setLoading(false);//로딩화면
                 })
                 .catch(error => {
                     console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
@@ -134,6 +136,7 @@ const ChatBot = ({ children }) => {
                         };
                         setMessages(prevMessages => [...prevMessages, botMessage]);
                         scrollToBottom();
+                        setLoading(false);//로딩화면
                     })
                     .catch(error => {
                         console.error('서버 또는 GPT에게 응답을 받지 못했습니다.', error);
@@ -172,11 +175,13 @@ const ChatBot = ({ children }) => {
             {isChatbotOpen && (
                 <div className={`chatbot-window ${isChatbotClosing ? 'chatbot-window-hidden' : isChatbotOpen ? 'chatbot-window-visible' : ''}`}>
                     <div className="chatbot-header">
-                        마약 상담 챗봇
-                        <button className="close-button" onClick={toggleChatbot}>
-                            <IoArrowForwardOutline size="30"/>
-                        </button>
+                        <div className="chatbot-title">
+                            마약 상담 챗봇
                         </div>
+                        <button className="close-button" onClick={toggleChatbot}>
+                            <IoArrowForwardOutline size="35"/>
+                        </button>
+                    </div>
                     <div className="chatbot-messages">
                         {messages.map((message, index) => (
                             <div
@@ -188,6 +193,13 @@ const ChatBot = ({ children }) => {
                                 </div>
                             </div>
                         ))}
+                        {loading && (
+                            <div className="loading-dots">
+                                <div className="dot"></div>
+                                <div className="dot"></div>
+                                <div className="dot"></div>
+                            </div>
+                        )}
                         <div ref={messageEndRef}></div>
                     </div>
                     <div className="chatbot-input">
