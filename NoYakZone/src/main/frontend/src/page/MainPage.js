@@ -66,13 +66,13 @@ const MainPage = () => {
                             <h2 className='slogan'>Making Tomorrow Better</h2>
                             <p>
                                 <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
-                               
+
                             </p>
                         </div>
-                        <Swiper 
-                            navigation={true} 
+                        <Swiper
+                            navigation={true}
                             pagination={{ clickable: true }}
-                            modules={[Navigation, Pagination, Autoplay]} 
+                            modules={[Navigation, Pagination, Autoplay]}
                             className="mySwiper"
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
                             speed={3000}
@@ -92,10 +92,10 @@ const MainPage = () => {
                 </div>
 
                 <div className='DrugInfo drugInfoContent'>
-                    <Swiper 
-                        navigation={true} 
+                    <Swiper
+                        navigation={true}
                         pagination={{ clickable: true }}
-                        modules={[Navigation, Pagination, Autoplay]} 
+                        modules={[Navigation, Pagination, Autoplay]}
                         className="mySwiper"
                         autoplay={{ delay: 4000, disableOnInteraction: false }}
                         speed={4000}
