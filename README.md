@@ -30,7 +30,7 @@
 
 
 #### 요구 사항 명세서
-<img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/66817e38-b305-4641-9204-31c95336ec2f">
+<img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/0981d958-65d3-4869-96fc-62a62d4c6be9">
 
 #### ERD
 
