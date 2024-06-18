@@ -19,8 +19,8 @@ import ketamine from '../image/케타민.png';
 import cocaine from '../image/코카인.png';
 import methylphenidate from '../image/페니드.png';
 import noImage from '../image/이미지 없음.png';
-import cannabis from '../image/대마초.png'
-import pethidine from '../image/페치딘.png'
+import cannabis from '../image/대마초.png';
+import pethidine from '../image/페치딘.png';
 
 const exampleData = [
     { id: 1, name: '펜타닐(Fentanyl)', imageUrl: fentanyl, link: 'http://www.health.kr/Menu.PharmReview/_uploadfiles/펜타닐(fentanyl).pdf' },
@@ -55,24 +55,21 @@ const MainPage = () => {
             <div className='Content'>
                 <div className='ServiceInfo'>
                     <h1 className='Maintitle'>서비스 소개</h1>
-                    <h4 className='serviceGoal' onClick={goToAboutPage}>
+                    <h2 className='serviceGoal' onClick={goToAboutPage}>
                         우리의 사명은 마약 사용을 줄이고, 이를 통해 사회의 안전과 건강을 증진하는 것입니다.
                         <h4>다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.
                         </h4>
-                    </h4>
+                    </h2>
 
                     <div className="slideContent">
                         <div className="slideText">
                             <h2 className='slogan'>Making Tomorrow Better</h2>
-                            <p>
-                                <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
-
-                            </p>
+                            <p>저희 NoYakZone은 마약이 없는 대한민국을 꿈꾸고 있습니다.</p>
                         </div>
-                        <Swiper
-                            navigation={true}
+                        <Swiper 
+                            navigation={true} 
                             pagination={{ clickable: true }}
-                            modules={[Navigation, Pagination, Autoplay]}
+                            modules={[Navigation, Pagination, Autoplay]} 
                             className="mySwiper"
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
                             speed={3000}
@@ -92,10 +89,10 @@ const MainPage = () => {
                 </div>
 
                 <div className='DrugInfo drugInfoContent'>
-                    <Swiper
-                        navigation={true}
+                    <Swiper 
+                        navigation={true} 
                         pagination={{ clickable: true }}
-                        modules={[Navigation, Pagination, Autoplay]}
+                        modules={[Navigation, Pagination, Autoplay]} 
                         className="mySwiper"
                         autoplay={{ delay: 4000, disableOnInteraction: false }}
                         speed={4000}

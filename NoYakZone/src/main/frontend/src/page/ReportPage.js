@@ -70,14 +70,17 @@ const ReportPage = () => {
     <div>
       <div className="container">
         <div className="header">
-          <h1>신고 내역</h1>
-          <button onClick={openModal} className="report-button">
-            신고하기
-          </button>
+          <h1 className="ReportHeader">신고 내역</h1>
+          <div className="button-container">
+            <button onClick={openModal} className="report-button">
+              신고하기
+            </button>
+          </div>
         </div>
         <div className="description">
           <p>이 페이지의 주요 기능은 사용자가 신고한 내용을 AI가 1차로 분석하여 마약 관련 여부를 판별하는 것입니다.</p>
-          <p>이후, 수사 전문가가 2차 검토를 통해 해당 사이트가 마약 관련 사이트인지 최종 확인합니다. 이를 통해, 사용자들에게 더 깨끗하고 안전한 인터넷 환경을 제공하고자 합니다.</p>
+          <p>이후, 수사 전문가가 2차 검토를 통해 해당 사이트가 마약 관련 사이트인지 최종 확인합니다.</p>
+          <p>이를 통해, 사용자들에게 더 깨끗하고 안전한 인터넷 환경을 제공하고자 합니다.</p>
         </div>
         <ul className="reports-list">
           {reports

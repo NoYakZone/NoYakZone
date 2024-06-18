@@ -64,9 +64,8 @@ body {
 .serviceGoal {
   color: #333;
   margin: 10px 0;
-  background-color: white;
   text-align: left;
-  padding-left: 50px;  /* 왼쪽에 공간을 추가 */
+  padding-left: 20px;  /* 왼쪽에 공간을 추가 */
 }
 
 .slogan {

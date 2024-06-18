@@ -1,8 +1,14 @@
+body {
+    margin: 0;
+    font-family: 'Arial, sans-serif';
+    background-color: #f0f2f5;
+}
+
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 900px;
+    margin: 50px auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -12,12 +18,23 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    position: relative;
 }
 
-.header h1 {
+.ReportHeader {
     font-size: 2em;
     color: #333;
     margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.button-container {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .report-button {
@@ -35,6 +52,14 @@
     background-color: #0056b3;
 }
 
+.description {
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
 .reports-list {
     list-style: none;
     padding: 0;
@@ -44,16 +69,17 @@
 .report-item {
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 15px;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .report-item:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f1f1f1;
 }
 
 .report-icon {
@@ -103,7 +129,7 @@
 .report-title-date p {
     margin: 0;
     font-size: 0.875em;
-    color: #666;
+    color: #999;
 }
 
 .report-text {

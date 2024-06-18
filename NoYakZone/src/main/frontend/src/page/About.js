@@ -262,13 +262,13 @@ const About = () => {
         <div>
             <Fade>
                 <div>
-                    <h1>약 소개</h1>
+                    {/* <h1>약 소개</h1> */}
                 </div>
                 <div className='drugImg'>
                     <img src={drug} alt="drug" />
                 </div>
                 <div className="about-description">
-                    <div className='serviceGoal'>
+                    <div className='serviceGoal1'>
                         <h4>우리의 사명은 마약 사용을 줄이고, 이를 통해 사회의 안전과 건강을 증진하는 것입니다.</h4>
                         <h4>우리는 다양한 대상들에게 맞춤형 서비스를 제공하여 이 목표를 달성하고자 합니다.</h4>
                     </div>
