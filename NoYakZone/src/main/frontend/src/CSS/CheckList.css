@@ -48,10 +48,15 @@ h2 {
     margin-right: 5px;
 }
 
-.submit-button {
+.checklist-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.checklist-submit-button {
     display: block;
-    width: 90%;
-    padding: 10px;
+    width: auto;
+    padding: 10px 20px;
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -59,9 +64,10 @@ h2 {
     font-size: 18px;
     cursor: pointer;
     margin-top: 20px;
+    text-align: center;
 }
 
-.submit-button:hover {
+.checklist-submit-button:hover {
     background-color: #0056b3;
 }
 
@@ -166,8 +172,4 @@ h2 {
 
 .button-container button:hover {
     background-color: #0056b3;
-}
-
-.submit-button {
-    width: auto;
 }
