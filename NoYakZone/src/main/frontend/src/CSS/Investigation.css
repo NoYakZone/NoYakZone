@@ -1,82 +1,82 @@
 .investigation-container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .search-bar {
-    margin-bottom: 20px;
-  }
-  
-  .search-bar input {
-    padding: 10px;
-    width: 200px;
-  }
-  
-  .search-bar button {
-    padding: 10px;
-    margin-left: 10px;
-  }
-  
-  .content {
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .posts-container {
-    margin-top: 20px;
-  }
-  
-  .posts-container ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .posts-container li {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .posts-container li:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .page-item {
-    margin: 0 5px;
-  }
-  
-  .page-link {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .page-item.active .page-link {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-  }
-  
-  .access-denied {
-    text-align: center;
-    margin-top: 50px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  }
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 200px;
+}
+
+.search-bar button {
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+}
+
+.posts-container {
+  margin-top: 20px;
+}
+
+.posts-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.posts-container li {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.posts-container li:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.access-denied {
+  text-align: center;
+  margin-top: 50px;
+
+}

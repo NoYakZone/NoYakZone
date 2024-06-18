@@ -1,3 +1,5 @@
+/* InvestigationDetailModal.css */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -5,42 +7,84 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black overlay */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    /* Ensure it's above other elements */
-}
-
-.modal-wrapper {
-    background-color: white;
+  }
+  
+  .modal-wrapper {
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     max-width: 80%;
     max-height: 80%;
-    overflow: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
+    overflow-y: auto; /* Allow vertical scrolling */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
-}
-
-.modal-close {
+  }
+  
+  .modal-close {
     background: none;
     border: none;
+    font-size: 24px;
     cursor: pointer;
-    font-size: 20px;
     color: #aaa;
-}
-
-.modal-close:hover {
+    transition: color 0.3s;
+  }
+  
+  .modal-close:hover {
     color: #000;
-}
-
-.modal-content {
+  }
+  
+  .modal-content {
     margin-top: 10px;
-}
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  .detail-section {
+    margin-bottom: 10px;
+  }
+  
+  .detail-item {
+    margin-bottom: 10px;
+  }
+  
+  .scrollable-text {
+    max-height: 150px; /* Adjust max height as per your design */
+    overflow-y: auto; /* Enable scrolling for long text */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .detail-item strong {
+    margin-right: 5px;
+  }
+  
+  .modal-content img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+  
+  .modal-content a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  

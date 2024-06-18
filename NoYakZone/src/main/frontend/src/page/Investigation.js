@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Modal from "../modals/InvestigationDetailModal";
-import Prompt from './Prompt';
+import InvestigationDetailModal from "../modals/InvestigationDetailModal";
+import Prompt from "./Prompt";
 
 import "../CSS/Investigation.css";
 
@@ -25,7 +25,7 @@ function Investigation() {
 
   useEffect(() => {
     if (isOfficial) {
-      fetch("/api/endpoint") // Replace with your API endpoint
+      fetch("/api/endpoint")
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -73,13 +73,11 @@ function Investigation() {
 
   const openModal = (item) => {
     setModalContent(item);
-    console.log("모달이 켜진다");
     setModalOpen(true);
   };
 
   const closeModal = () => {
     setModalOpen(false);
-    console.log("모달이 꺼진다");
     setModalContent(null);
   };
 
@@ -104,87 +102,67 @@ function Investigation() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-
     <div>
-    <div className="investigation-container">
-      <div className="header">
-        <h1>　</h1>
-        <div className="search-bar">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search..."
-          />
-          <button onClick={handleSearch}>Search</button>
+      <div className="investigation-container">
+        <div className="header">
+          <h1>　</h1>
+          <div className="search-bar">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search..."
+            />
+            <button onClick={handleSearch}>Search</button>
+          </div>
         </div>
-      </div>
-      <div className="content">
-
-        <ul>
-          {searchResults.map((item) => (
-            <li key={item.id} onClick={() => openModal(item)}>
-              {item.name}
-            </li>
-          ))}
-        </ul>
-        <div className="posts-container">
-          <h2>Posts</h2>
+        <div className="content">
           <ul>
-            {currentPosts.map((post) => (
-              <li key={post.index}>
-                onClick={() => openModal(post)}
-
-                <div>
-                  <strong>
-                    {post.text.length > 100
-                      ? post.text.substring(0, 100) + "..."
-                      : post.text}
-                  </strong>
-                </div>
-                <div>{post.place}</div>
-
-                <div>{new Date(post.date).toLocaleDateString()}</div>
-                <div>{new Date(post.date).toLocaleString()}</div>
-                {post.url && (
-                  <div>
-                    <a
-                      href={post.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Link
-                    </a>
-                  </div>
-                )}
-                {post.picture && (
-                  <div>
-                    <img src={post.picture} alt={post.text} />
-                  </div>
-                )}
+            {searchResults.map((item) => (
+              <li key={item.id} onClick={() => openModal(item)}>
+                {item.name}
               </li>
             ))}
           </ul>
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </div>
-      </div>
-      <Modal isOpen={modalOpen} onClose={closeModal}>
-
-        {modalContent && (
-          <div>
-            <h2>{modalContent.name}</h2>
-            <p>{modalContent.description}</p>
+          <div className="posts-container">
+            <h2>게시물</h2>
+            <ul>
+              {currentPosts.map((post) => (
+                <li key={post.index} onClick={() => openModal(post)}>
+                  <div>
+                    <strong>
+                      {post.text.length > 100
+                        ? post.text.substring(0, 100) + "..."
+                        : post.text}
+                    </strong>
+                  </div>
+                  <div>{post.place}</div>
+                  <div>{new Date(post.date).toLocaleDateString()}</div>
+                  <div>{new Date(post.date).toLocaleString()}</div>
+                  {post.picture && (
+                    <div>
+                      <img src={post.picture} alt={post.text} />
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={posts.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
           </div>
-        )}
-      </Modal>
-    </div>
+        </div>
+        <InvestigationDetailModal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      </div>
 
-    <Prompt />
+      <Prompt />
     </div>
   );
 }
@@ -245,5 +223,5 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     </nav>
   );
 };
-export default Investigation;
 
+export default Investigation;
