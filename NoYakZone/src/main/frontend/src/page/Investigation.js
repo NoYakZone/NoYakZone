@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Modal from "../modals/InvestigationDetailModal";
-import Prompt from './Prompt';
-
+import InvestigationDetailModal from "../modals/InvestigationDetailModal";
+import Prompt from "./Prompt";
 import "../CSS/Investigation.css";
 
 function Investigation() {
@@ -15,6 +14,7 @@ function Investigation() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isCrawling, setIsCrawling] = useState(false);
   const postsPerPage = 10;
   const history = useHistory();
 
@@ -25,7 +25,7 @@ function Investigation() {
 
   useEffect(() => {
     if (isOfficial) {
-      fetch("/api/endpoint") // Replace with your API endpoint
+      fetch("/api/endpoint")
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -61,40 +61,47 @@ function Investigation() {
   }, [isOfficial]);
 
   const handleSearch = () => {
+    setIsCrawling(true);
     fetch("http://116.125.97.34:9090/start_crawling", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: searchTerm }),
-    });
-    alert("크롤링 시작");
+    })
+      .then(() => {
+        setTimeout(() => {
+          setIsCrawling(false);
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Error starting crawling:", error);
+        setIsCrawling(false);
+      });
   };
 
   const openModal = (item) => {
     setModalContent(item);
-    console.log("모달이 켜진다");
     setModalOpen(true);
   };
 
   const closeModal = () => {
     setModalOpen(false);
-    console.log("모달이 꺼진다");
     setModalContent(null);
   };
 
   if (!isOfficial) {
     return (
       <div className="access-denied">
-        <h1>Access Denied</h1>
-        <p>You do not have the required permissions to view this page.</p>
-        <button onClick={() => history.push("/")}>Go to Home</button>
+        <h1>접근 거부</h1>
+        <p>이 페이지를 볼 수 있는 권한이 없습니다.</p>
+        <button onClick={() => history.push("/")}>홈으로 이동</button>
       </div>
     );
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>로딩 중...</div>;
   }
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -104,87 +111,79 @@ function Investigation() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-
     <div>
-    <div className="investigation-container">
-      <div className="header">
-        <h1>　</h1>
-        <div className="search-bar">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search..."
-          />
-          <button onClick={handleSearch}>Search</button>
-        </div>
-      </div>
-      <div className="content">
-
-        <ul>
-          {searchResults.map((item) => (
-            <li key={item.id} onClick={() => openModal(item)}>
-              {item.name}
-            </li>
-          ))}
-        </ul>
-        <div className="posts-container">
-          <h2>Posts</h2>
-          <ul>
-            {currentPosts.map((post) => (
-              <li key={post.index}>
-                onClick={() => openModal(post)}
-
-                <div>
-                  <strong>
-                    {post.text.length > 100
-                      ? post.text.substring(0, 100) + "..."
-                      : post.text}
-                  </strong>
-                </div>
-                <div>{post.place}</div>
-
-                <div>{new Date(post.date).toLocaleDateString()}</div>
-                <div>{new Date(post.date).toLocaleString()}</div>
-                {post.url && (
-                  <div>
-                    <a
-                      href={post.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Link
-                    </a>
-                  </div>
-                )}
-                {post.picture && (
-                  <div>
-                    <img src={post.picture} alt={post.text} />
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </div>
-      </div>
-      <Modal isOpen={modalOpen} onClose={closeModal}>
-
-        {modalContent && (
-          <div>
-            <h2>{modalContent.name}</h2>
-            <p>{modalContent.description}</p>
+      <div className="investigation-container">
+        <div className="header">
+          <h1 className="ReportHeader">신고 내역</h1>
+          <div className="descriptionIN">
+            <p>이 페이지의 주요 기능은 크롤링을 통해 마약수사를 하는 분들께 도움을 드리기 위해 만든 페이지 입니다.</p>
+            <p>각종 사이트를 알아보지 않아도 크롤링을 통해 은어가 있는 키워드를 찾아줍니다.</p>
+            <p>이를 통해, 사용자들에게 더 깨끗하고 안전한 인터넷 환경을 제공하고자 합니다.</p>
           </div>
-        )}
-      </Modal>
-    </div>
-
-    <Prompt />
+          <div className="search-bar">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="검색..."
+            />
+            <button onClick={handleSearch}>검색</button>
+          </div>
+        </div>
+        <div className="content">
+          {isCrawling ? (
+            <div className="loading-container">
+              <div className="loading-spinner"></div>
+            </div>
+          ) : (
+            <>
+              <ul>
+                {searchResults.map((item) => (
+                  <li key={item.id} onClick={() => openModal(item)}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+              <div className="posts-container">
+                <h2>게시물</h2>
+                <ul>
+                  {currentPosts.map((post) => (
+                    <li key={post.index} onClick={() => openModal(post)}>
+                      <div>
+                        <strong>
+                          {post.text.length > 100
+                            ? post.text.substring(0, 100) + "..."
+                            : post.text}
+                        </strong>
+                      </div>
+                      <div>{post.place}</div>
+                      <div>{new Date(post.date).toLocaleDateString()}</div>
+                      <div>{new Date(post.date).toLocaleString()}</div>
+                      {post.picture && (
+                        <div>
+                          <img src={post.picture} alt={post.text} />
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <Pagination
+                  postsPerPage={postsPerPage}
+                  totalPosts={posts.length}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
+              </div>
+            </>
+          )}
+        </div>
+        <InvestigationDetailModal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      </div>
+      <Prompt />
     </div>
   );
 }
@@ -245,5 +244,5 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     </nav>
   );
 };
-export default Investigation;
 
+export default Investigation;

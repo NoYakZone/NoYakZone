@@ -22,7 +22,6 @@ const CheckList = () => {
 
     const [answers, setAnswers] = useState(Array(questions.length).fill(null));
     const [submitted, setSubmitted] = useState(false);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const pieChartRef = useRef(null);
 
     const handleRadioChange = (index, value) => {
@@ -100,48 +99,40 @@ const CheckList = () => {
             {!submitted ? (
                 <form onSubmit={handleSubmit}>
                     <AnimatePresence mode='wait'>
-                        {questions.slice(currentQuestionIndex, currentQuestionIndex + 5).map((question, index) => (
+                        {questions.map((question, index) => (
                             <motion.div 
-                                key={currentQuestionIndex + index} 
+                                key={index} 
                                 initial={{ opacity: 0, x: 100 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -100 }}
                                 className="con_box2"
                             >
-                                <div className="question1"><span className="num_01">{currentQuestionIndex + index + 1}</span> <div className="con">{question.question}</div></div>
+                                <div className="question1"><span className="num_01">{index + 1}</span> <div className="con">{question.question}</div></div>
                                 <div className="a_box2">
                                     <label>
                                         <input 
                                             type="radio" 
-                                            name={`q${currentQuestionIndex + index + 1}`} 
+                                            name={`q${index + 1}`} 
                                             value="0" 
-                                            checked={answers[currentQuestionIndex + index] === '0'} 
-                                            onChange={() => handleRadioChange(currentQuestionIndex + index, '0')} 
+                                            checked={answers[index] === '0'} 
+                                            onChange={() => handleRadioChange(index, '0')} 
                                         />아니오
                                     </label>
                                     <label>
                                         <input 
                                             type="radio" 
-                                            name={`q${currentQuestionIndex + index + 1}`} 
+                                            name={`q${index + 1}`} 
                                             value="1" 
-                                            checked={answers[currentQuestionIndex + index] === '1'} 
-                                            onChange={() => handleRadioChange(currentQuestionIndex + index, '1')} 
+                                            checked={answers[index] === '1'} 
+                                            onChange={() => handleRadioChange(index, '1')} 
                                         />예
                                     </label>
                                 </div>
                             </motion.div>
                         ))}
                     </AnimatePresence>
-                    <div className="button-container">
-                        {currentQuestionIndex > 0 && (
-                            <button type="button" onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 5)}>이전</button>
-                        )}
-                        {currentQuestionIndex + 5 < questions.length && (
-                            <button type="button" onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 5)}>다음</button>
-                        )}
-                        {currentQuestionIndex + 5 >= questions.length && (
-                            <button type="submit" className="submit-button">제출하기</button>
-                        )}
+                    <div className="checklist-button-container">
+                        <button type="submit" className="checklist-submit-button">제출하기</button>
                     </div>
                 </form>
             ) : (
