@@ -94,10 +94,6 @@ const Community = () => {
     setSelectedSlang(slang);
   };
 
-  const closeModal = () => {
-    setSelectedSlang(null);
-  };
-
   const handleInitialSearch = (initial) => {
     setInitial(initial);
     setSearchTerm("");
@@ -185,6 +181,12 @@ const Community = () => {
             ))}
           </div>
         </div>
+        {selectedSlang && (
+          <div className="highlighted-description">
+            <h3>{selectedSlang.word}</h3>
+            <p>{selectedSlang.detail}</p>
+          </div>
+        )}
         <div className="slang-list">
           <AnimatePresence>{renderSlangItems()}</AnimatePresence>
         </div>
@@ -219,35 +221,6 @@ const Community = () => {
             &gt;
           </button>
         </div>
-        <AnimatePresence>
-          {selectedSlang && (
-            <>
-              <motion.div
-                className="modal-overlay"
-                onClick={closeModal}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
-                exit={{ opacity: 0 }}
-              ></motion.div>
-              <motion.div
-                className="modal"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-              >
-                <div className="modal-header">
-                  <h1>{selectedSlang.word}</h1>
-                  <button className="modal-close" onClick={closeModal}>
-                    &times;
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <p>{selectedSlang.detail}</p>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </div>
       <ChatBot />
     </div>
