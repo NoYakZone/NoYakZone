@@ -15,9 +15,21 @@ const Prompt = ({ children }) => {
     const [isPromptClosing, setIsPromptClosing] = useState(false);//챗봇 버튼 닫을 때
     const [selectedPrompt, setSelectedPrompt] = useState(null); // 선택된 버튼 0:은어, 1:아이디, 2:특정단어
     const [showQuickButtons, setShowQuickButtons] = useState(true);//프롬프트 보이기
+    const [patters, setPatters] = useState([]);
 
     useEffect(() => {
+        getPatter();
     }, []);
+
+    const getPatter = () => {
+        axios.get(`http://localhost:7890/patter`)
+            .then(response => {
+                setPatters(response.data);
+            })
+            .catch(error => {
+                console.log("은어 가져오기 실패");
+            });
+    };
 
     const togglePrompt = () => {//버튼 보이게 하기
         if (isPromptOpen) {//메세지창이 닫힐 때
@@ -105,16 +117,32 @@ const Prompt = ({ children }) => {
             axios.get(`http://localhost:7890/prompt/searchBoardsByUserId?userId=${extractedString}`)
             .then(response => {
                 if (response.data.length > 0) {
-                    response.data.forEach(item => {//<h4></h4>
+                    response.data.forEach(item => {
                         const date = new Date(item.date);
                         const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                        
+                        // item.text를 patters 배열의 단어로 교체
+                        let updatedText = item.text;
+                        patters.forEach(patter => {
+                        // <span> 태그를 포함한 부분을 제외하고 텍스트 부분만 교체
+                        const parts = updatedText.split(/(<span[^>]*>.*?<\/span>)/);
+                        updatedText = parts.map(part => {
+                            if (part.match(/<span[^>]*>.*?<\/span>/)) {
+                                return part; // <span> 태그가 있는 부분은 그대로 반환
+                            } else {
+                                // <span> 태그가 없는 부분만 교체
+                                return part.replace(patter.word, `<span class="tooltip">${patter.word}<span class="info-icon">ⓘ</span><span class="tooltiptext">${patter.detail}</span></span>`);
+                            }
+                        }).join('');
+                        });
+
                         addMessage(`
-                            <h4>ID : ${item.id}</h4>
-                            <h4>Date : ${formattedDate}</h4>
-                            <h4>Web Site : ${item.web}</h4>
+                            <h4>아이디 : ${item.id}</h4>
+                            <h4>날짜 : ${formattedDate}</h4>
+                            <h4>사이트 : ${item.web}</h4>
                             <h4><a href="${item.url}">${item.url}</a></h4>
                             <h4>----------------------------</h4>
-                            ${item.text}`, true); // 응답 메세지 추가
+                            ${updatedText}`, true); // 응답 메세지 추가
                     });
                 } else {
                     addMessage(`${extractedString} 가 게시한 게시물을 찾을 수 없습니다...`, true); // 응답 메세지 추가
@@ -135,13 +163,29 @@ const Prompt = ({ children }) => {
                     response.data.forEach(item => {
                         const date = new Date(item.date);
                         const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                        
+                        // item.text를 patters 배열의 단어로 교체
+                        let updatedText = item.text;
+                        patters.forEach(patter => {
+                        // <span> 태그를 포함한 부분을 제외하고 텍스트 부분만 교체
+                        const parts = updatedText.split(/(<span[^>]*>.*?<\/span>)/);
+                        updatedText = parts.map(part => {
+                            if (part.match(/<span[^>]*>.*?<\/span>/)) {
+                                return part; // <span> 태그가 있는 부분은 그대로 반환
+                            } else {
+                                // <span> 태그가 없는 부분만 교체
+                                return part.replace(patter.word, `<span class="tooltip">${patter.word}<span class="info-icon">ⓘ</span><span class="tooltiptext">${patter.detail}</span></span>`);
+                            }
+                        }).join('');
+                        });
+
                         addMessage(`
-                            <h4>ID : ${item.id}</h4>
-                            <h4>Date : ${formattedDate}</h4>
-                            <h4>Web Site : ${item.web}</h4>
+                            <h4>아이디 : ${item.id}</h4>
+                            <h4>날짜 : ${formattedDate}</h4>
+                            <h4>사이트 : ${item.web}</h4>
                             <h4><a href="${item.url}">${item.url}</a></h4>
                             <h4>----------------------------</h4>
-                            ${item.text}`, true); // 응답 메세지 추가
+                            ${updatedText}`, true); // 응답 메세지 추가
                     });
                 } else {
                     addMessage(`${extractedString} 단어가 포함된 게시물을 찾을 수 없습니다...`, true); // 응답 메세지 추가
