@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Comparator;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/prompt")
 public class PromptController {
 
@@ -37,12 +40,24 @@ public class PromptController {
     @GetMapping("/searchBoardsByUserId")//딜러 검색
     public ResponseEntity<List<Board>> searchBoardsByUserId(@RequestParam("userId") String userId) {
         List<Board> boards = boardRepository.findById(userId);
+        if (boards.size() > 5) {
+            boards = boards.stream()
+                    .sorted(Comparator.comparing(Board::getDate).reversed())
+                    .limit(5)
+                    .collect(Collectors.toList());
+        }
         return ResponseEntity.ok(boards);
     }
 
     @GetMapping("/searchBoardsByText")//게시글 검색
     public ResponseEntity<List<Board>> searchBoardsByText(@RequestParam("text") String text) {
         List<Board> boards = boardRepository.findByTextContaining(text);
+        if (boards.size() > 5) {
+            boards = boards.stream()
+                    .sorted(Comparator.comparing(Board::getDate).reversed())
+                    .limit(5)
+                    .collect(Collectors.toList());
+        }
         return ResponseEntity.ok(boards);
     }
 }

@@ -20,8 +20,8 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 500px;
-    height: 600px;
+    width: 600px;
+    height: 650px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -50,6 +50,7 @@
 
 .prompt-message {
     display: flex;
+    word-wrap: break-word;
     padding: 5px;
     margin: 5px;
 }
@@ -74,8 +75,8 @@
 }
 
 .bot-message .message-box {
-    background-color: #37159e; /* 파란색 배경 */
-    color: #fff; /* 흰색 글자 */
+    background-color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /*******************************메세지 부분*******************************/
@@ -94,7 +95,7 @@
     outline: none;
 }
 
-.prompt-input button {
+.prompt-input .send-button {
     padding-top: 10px;
     padding-bottom: 6px;
     padding-left: 13px;
@@ -108,8 +109,25 @@
     border-radius: 0 0 8px 0;
 }
 
-.prompt-input button:hover {
-    background-color: #0056b3;
+.prompt-input .send-button:hover {
+    background-color: #3300cc;
+}
+
+.prompt-input .support-button {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 13px;
+    padding-right: 13px;
+    background-color: #00DDDD; /* 예시 색상 */
+    color: white;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.prompt-input .support-button:hover {
+    background-color: #3300cc; /* 예시 색상 */
 }
 
 .prompt-title {
@@ -199,24 +217,78 @@
 
 .prompt-quick-buttons {
     position: fixed;
-    bottom: 60px;
-    right: 10px;
-    width: 480px;
+    bottom: 55px;
+    right: 30px;
+    width: 540px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* 다른 요소들 위에 위치하도록 합니다. */
 }
 
+.prompt-quick-buttons text {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .prompt-quick-buttons button {
-    background-color: #0056b3;
-    margin: 10px;
+    font-size: 17px;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 3px;
+}
+
+.prompt-quick-buttons button.btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
 }
 
 .prompt-quick-buttons button.selected {
-    background-color: #e0e0e0; /* 선택된 버튼 배경 색상 */
-    border-color: #000; /* 선택된 버튼 테두리 색상 */
+    background-color: #fff; /* 선택된 버튼 배경 색상 */
+    border: 3px solid #00DDDD;
+    font-weight: bold;
 }
+
+.prompt-quick-buttons button:hover {
+    background-color: #f0f0f0;
+}
+
+/***********툴팁***********/
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Tooltip 위치 설정 */
+    left: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .info-icon {
+    font-size: 15px;
+    margin-left: 1px;
+    color: blue;
+  }
