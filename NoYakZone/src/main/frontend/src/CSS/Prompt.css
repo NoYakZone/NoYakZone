@@ -50,6 +50,8 @@
 
 .prompt-message {
     display: flex;
+    word-wrap: break-word;
+    overflow: hidden; /* 내용이 넘치면 숨김 */
     padding: 5px;
     margin: 5px;
 }
@@ -71,11 +73,12 @@
     text-align: left; /* 텍스트 왼쪽 정렬 */
     max-width: 70%; /* 메시지 박스가 부모 요소의 최대 너비를 넘지 않도록 설정 */
     word-wrap: break-word; /* 너무 긴 단어가 있을 경우 줄바꿈 처리 */
+    overflow: hidden; /* 내용이 넘치면 숨김 */
 }
 
 .bot-message .message-box {
-    background-color: #37159e; /* 파란색 배경 */
-    color: #fff; /* 흰색 글자 */
+    background-color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /*******************************메세지 부분*******************************/

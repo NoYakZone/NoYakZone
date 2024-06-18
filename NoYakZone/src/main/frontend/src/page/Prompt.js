@@ -15,13 +15,8 @@ const Prompt = ({ children }) => {
     const [isPromptClosing, setIsPromptClosing] = useState(false);//챗봇 버튼 닫을 때
     const [selectedPrompt, setSelectedPrompt] = useState(null); // 선택된 버튼 0:은어, 1:아이디, 2:특정단어
     const [showQuickButtons, setShowQuickButtons] = useState(true);//프롬프트 보이기
-    const [boardResult, setBoardResult] = useState([]);//선택된 버튼 2:특정단어 결과
 
     useEffect(() => {
-        const storedItems = localStorage.getItem("promptchat"); //수사기록 불러오기
-        if (storedItems) {
-            setMessages(JSON.parse(storedItems));
-        }
     }, []);
 
     const togglePrompt = () => {//버튼 보이게 하기
@@ -66,13 +61,10 @@ const Prompt = ({ children }) => {
     const addMessage = (msg, bot) => {//메세지 추가
         const basicMessage = {
             index: getLastMessageIndex(),
-            userId: "",
-            date: new Date().toISOString(),
             text: msg,
             bot: bot,
         };
         setMessages((prevMessages) => [...prevMessages, basicMessage]);
-        localStorage.setItem("promptchat", JSON.stringify(messages));//수사기록 저장
     };
 
     const handleSendMessage = () => {//사용자가 메세지를 입력했을 때
@@ -99,7 +91,7 @@ const Prompt = ({ children }) => {
         if (selectedPrompt === 0) {//은어
             axios.get(`http://localhost:7890/prompt/searchPatterByWord?word=${extractedString}`)
             .then(response => {
-                addMessage(`${extractedString} (이)란? ${response.data[0].detail}`, true);//응답 메세지 추가
+                addMessage(`<h4>${extractedString} (이)란?</h4> ${response.data[0].detail}`, true);//응답 메세지 추가
                 scrollToBottom();
                 setLoading(false);//로딩화면
             })
@@ -110,10 +102,23 @@ const Prompt = ({ children }) => {
             });
         }
         else if(selectedPrompt===1){//아이디
-            /*
             axios.get(`http://localhost:7890/prompt/searchBoardsByUserId?userId=${extractedString}`)
             .then(response => {
-                addMessage(`${extractedString} 아이디의 게시물`, true);//응답 메세지 추가
+                if (response.data.length > 0) {
+                    response.data.forEach(item => {//<h4></h4>
+                        const date = new Date(item.date);
+                        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                        addMessage(`
+                            <h4>ID : ${item.id}</h4>
+                            <h4>Date : ${formattedDate}</h4>
+                            <h4>Web Site : ${item.web}</h4>
+                            <h4><a href="${item.url}">${item.url}</a></h4>
+                            <h4>----------------------------</h4>
+                            ${item.text}`, true); // 응답 메세지 추가
+                    });
+                } else {
+                    addMessage(`${extractedString} 가 게시한 게시물을 찾을 수 없습니다...`, true); // 응답 메세지 추가
+                }
                 scrollToBottom();
                 setLoading(false);//로딩화면
             })
@@ -122,13 +127,25 @@ const Prompt = ({ children }) => {
                 scrollToBottom();
                 setLoading(false);//로딩화면
             });
-            */
         }
         else if(selectedPrompt===2){//특정단어 http://localhost:7890/prompt/searchBoardsByText?text=아이스작대기
             axios.get(`http://localhost:7890/prompt/searchBoardsByText?text=${extractedString}`)
             .then(response => {
-                addMessage(`${extractedString} 단어가 포함된 게시물 검색 결과`, true);//응답 메세지 추가
-                setBoardResult(response.data);//배열로 응답 결과 저장
+                if (response.data.length > 0) {
+                    response.data.forEach(item => {
+                        const date = new Date(item.date);
+                        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                        addMessage(`
+                            <h4>ID : ${item.id}</h4>
+                            <h4>Date : ${formattedDate}</h4>
+                            <h4>Web Site : ${item.web}</h4>
+                            <h4><a href="${item.url}">${item.url}</a></h4>
+                            <h4>----------------------------</h4>
+                            ${item.text}`, true); // 응답 메세지 추가
+                    });
+                } else {
+                    addMessage(`${extractedString} 단어가 포함된 게시물을 찾을 수 없습니다...`, true); // 응답 메세지 추가
+                }
                 scrollToBottom();
                 setLoading(false);//로딩화면
             })
@@ -172,9 +189,10 @@ const Prompt = ({ children }) => {
                                 key={index}
                                 className={`prompt-message ${message.bot ? 'bot-message' : 'user-message'}`}
                             >
-                                <div className="message-box">
-                                    {message.text}
-                                </div>
+                                <div
+                                    className="message-box"
+                                    dangerouslySetInnerHTML={{ __html: message.text }}
+                                />
                             </div>
                         ))}
                         {loading && (
