@@ -21,7 +21,7 @@
 | 나형진 | 윤영학 | 천가온 | 송동준 | 고건희 |
 | --- | --- | --- | --- | --- |
 | <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/9f8bd85a-06ef-45c7-a8a0-cac97b2890a3" width="150" height="150"> | <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/fe02368b-5e14-47cf-be16-c2766a5ab726" width="150" height="150"> | <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/b3f7599d-61dc-45fb-9382-e4b9ddf70c8b" width="150" height="150">
-||  |
+| <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/c0411d8a-46fe-4ebc-a629-8815e1b09626" width="150" height="150" >|  |
 | 팀장<br>풀스택<br>서버 구현 | 팀원<br>백엔드<br>크롤링, 탐지 모델 개발 | 팀원<br>백엔드<br>크롤링, 탐지 모델 개발 | 팀원<br>프론트<br>UI디자인, 기획 | 팀원<br>백엔드<br>챗봇 구현 |
 
 #### 제작목적
