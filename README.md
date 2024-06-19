@@ -48,4 +48,4 @@
 
 
 
-<a href="https://youtu.be/8Sn6vZ6Viv0"/>
+<a href="https://youtu.be/8Sn6vZ6Viv0">영상 링크</a>
