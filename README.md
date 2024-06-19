@@ -38,7 +38,7 @@
 
 ### 시연 영상
 
-[![Video Label](https://github.com/NoYakZone/NoYakZone/assets/75625504/55d4c32d-b88c-4d02-a0fa-22d6d3b710d1)](https://youtu.be/'8Sn6vZ6Viv0')
+[![Video Label](https://github.com/NoYakZone/NoYakZone/assets/75625504/55d4c32d-b88c-4d02-a0fa-22d6d3b710d1)](https://youtu.be/8Sn6vZ6Viv0)
 <a href="https://youtu.be/8Sn6vZ6Viv0">영상 링크</a>
 
 #### 프론트엔드
