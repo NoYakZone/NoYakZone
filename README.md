@@ -45,3 +45,7 @@
 
 #### API
 <img src="https://img.shields.io/badge/openai-412991?style=for-the-badge&logo=openai&logoColor=white">&nbsp;
+
+
+
+<a href="https://youtu.be/8Sn6vZ6Viv0"/>
