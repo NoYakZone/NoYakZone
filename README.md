@@ -20,7 +20,7 @@
 
 | 나형진 | 윤영학 | 천가온 | 송동준 | 고건희 |
 | --- | --- | --- | --- | --- |
-| <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/9f8bd85a-06ef-45c7-a8a0-cac97b2890a3" width="150" height="150"> | <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/fe02368b-5e14-47cf-be16-c2766a5ab726" width="150" height="150"> | <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/b3f7599d-61dc-45fb-9382-e4b9ddf70c8b" width="150" height="150"> | <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/c0411d8a-46fe-4ebc-a629-8815e1b09626" width="150" height="150" >|  |
+| <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/9f8bd85a-06ef-45c7-a8a0-cac97b2890a3" width="150" height="150"> | <img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/fe02368b-5e14-47cf-be16-c2766a5ab726" width="150" height="150"> | <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/b3f7599d-61dc-45fb-9382-e4b9ddf70c8b" width="150" height="150"> | <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/c0411d8a-46fe-4ebc-a629-8815e1b09626" width="150" height="150" >| <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/9f87e184-df8d-41cc-8c54-a28beaa88d43" width="150" height="150"> |
 | 팀장<br>풀스택<br>서버 구현 | 팀원<br>백엔드<br>크롤링, 탐지 모델 개발 | 팀원<br>백엔드<br>크롤링, 탐지 모델 개발 | 팀원<br>프론트<br>UI디자인, 기획 | 팀원<br>백엔드<br>챗봇 구현 |
 
 #### 제작목적
@@ -32,9 +32,14 @@
 #### 요구 사항 명세서
 <img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/0981d958-65d3-4869-96fc-62a62d4c6be9">
 
-#### ERD
+#### 흐름도
 
-<img src="https://github.com/aSIX-final-project/Sonagi_App/assets/145747048/3d6d0e71-bec4-4959-88fc-33f59889e3d4">
+<img src="https://github.com/NoYakZone/NoYakZone/assets/75625504/652b8762-8149-48e7-9189-8aee730b1237">
+
+### 시연 영상
+
+[![Video Label](https://github.com/NoYakZone/NoYakZone/assets/75625504/55d4c32d-b88c-4d02-a0fa-22d6d3b710d1)](https://youtu.be/'8Sn6vZ6Viv0')
+<a href="https://youtu.be/8Sn6vZ6Viv0">영상 링크</a>
 
 #### 프론트엔드
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=javascript&logoColor=white">&nbsp;<img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=CSS&logoColor=white">&nbsp;<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">&nbsp;
@@ -47,4 +52,3 @@
 
 
 
-<a href="https://youtu.be/8Sn6vZ6Viv0">영상 링크</a>
